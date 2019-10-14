@@ -1,20 +1,55 @@
 #include <iostream>
 #include <string>
-#include <math.h>
+#include <fstream>
+
+#include "pa2Functions.h"
 
 using namespace std;
 
 int main() {
-    string command;
-    int num1, num2 = 0;
+    // Print header
+    initialize();
 
-    cout << "Please enter a command code: ";
-    cin >> command >> endl;
+    while (command != 'q' || command != 'Q') {
+        // Error check user input
+        while (!checkCode(selectCommand())) {
+            cout << "Invalid command code" << endl;
+        }
 
-    while (command != "quit") {
         switch (command) {
             case 'f' || 'F':
-
-        }
+                return true;
+            case 'B' || 'b':
+                return true;
+            case 'R' || 'r':
+                return true;
+            case 'U' || 'u':
+                return true;
+            case 'C' || 'c':
+                return true;
+            case 'E' || 'e':
+                return true;
+            case 'K' || 'k':
+                return true;
+            case 'S' || 's':
+                return true;
+            case 'N' || 'n':
+                return true;
+            case 'X' || 'x':
+                return true;
+            case 'L' || 'l':
+                return true;
+            case 'Y' || 'y':
+                return true;
+            case 'D' || 'd':
+                return true;
+            case 'I' || 'i':
+                return true;
+            case 'Q' || 'q':
+                return true;
+            default:
+                return false;
+        }    
     }
+    return 0;
 }
