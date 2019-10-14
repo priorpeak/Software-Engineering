@@ -18,7 +18,7 @@ int main() {
 
         switch (command) {
             case 'f' || 'F':
-                return true;
+                cout << "test" << endl;
             case 'B' || 'b':
                 return true;
             case 'R' || 'r':
