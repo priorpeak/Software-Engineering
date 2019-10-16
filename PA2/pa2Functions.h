@@ -36,3 +36,5 @@ double lucky(double);
 
 // Extra function prototypes
 char selectCommand();
+
+bool checkInput();

@@ -1,10 +1,13 @@
 #include <iostream>
-#include <string>
-#include <fstream>
 
 #include "pa2Functions.h"
 
 using namespace std;
+
+extern const int ENTRIES;
+char command;
+double first, last, delta;
+int num1, num2;
 
 int main() {
     // Print header
@@ -16,40 +19,34 @@ int main() {
             cout << "Invalid command code" << endl;
         }
 
+        // Match user input with relevant function in pa2Functions.h
         switch (command) {
-            case 'f' || 'F':
-                cout << "test" << endl;
-            case 'B' || 'b':
-                return true;
-            case 'R' || 'r':
-                return true;
-            case 'U' || 'u':
-                return true;
-            case 'C' || 'c':
-                return true;
-            case 'E' || 'e':
-                return true;
-            case 'K' || 'k':
-                return true;
-            case 'S' || 's':
-                return true;
-            case 'N' || 'n':
-                return true;
-            case 'X' || 'x':
-                return true;
-            case 'L' || 'l':
-                return true;
-            case 'Y' || 'y':
-                return true;
-            case 'D' || 'd':
-                return true;
-            case 'I' || 'i':
-                return true;
-            case 'Q' || 'q':
-                return true;
-            default:
-                return false;
-        }    
-    }
+            case 'f':
+                cout << "Please enter a number to return the factorial: ";
+                cin >> num1;
+                num2 = factorial(num1);
+                cout << "The factorial of "<< num1 << " is " << num2 << endl;
+                break;
+            case 'b':
+                cout << "Please enter a number: ";
+                cin >> num1;
+                num2 = fibonacci(num1);
+                cout << "The Fibonacci number at index " << num1 << " is " << num2 << endl;
+                break;
+            case 'r':
+                if (checkInput()) {
+                    if (first + delta > last) {
+                        cout << findSqrtValue(first) << endl;
+                        cout << findSqrtValue(last) << endl;
+                } else {
+                    for (int i = first; i < last && ENTRIES >= 0; i += delta) {
+                        cout << findSqrtValue(i) << endl;
+                    }
+                }
+                }
+                break;
+            case 'u':
+                
+        }   
     return 0;
 }
