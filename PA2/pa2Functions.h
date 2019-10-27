@@ -1,5 +1,5 @@
 // External vars
-extern const int ENTRIES = 10;
+extern const int ENTRIES;
 extern char command;
 extern double first, last, delta;
 
@@ -26,7 +26,7 @@ double areaSquare(double);
 
 int findNextOddValue(int);
 
-int findNextEventValue(int);
+int findNextEvenValue(int);
 
 double findNyanCatValue(double);
 
