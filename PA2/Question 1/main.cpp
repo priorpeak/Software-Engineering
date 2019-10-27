@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <fstream>
+#include <string>
 
 #include "pa2Functions.h"
 
@@ -9,6 +11,11 @@ int num1, num2, counter = 0;
 const int ENTRIES = 10;
 double first, last, delta = 0;
 char command;
+string filename;
+const char *charArray[20];
+bool file;
+
+ofstream writeFile;
 
 int main() {
     // Print header
@@ -28,6 +35,11 @@ int main() {
                 num2 = factorial(num1);
                 cout << "The factorial of "<< num1 << " is " << num2 << endl;
                 cout << endl << endl;
+
+                if (file) {
+                    writeFile << "The factorial of "<< num1 << " is " << num2 << endl;
+                    writeFile << endl << endl;  
+                }
                 break;
             case 'b':
                 cout << "Please enter a number: ";
@@ -35,6 +47,11 @@ int main() {
                 num2 = fibonacci(num1);
                 cout << "The Fibonacci number at index " << num1 << " is " << num2 << endl;
                 cout << endl << endl;
+
+                if (file) {
+                    writeFile << "The Fibonacci number at index " << num1 << " is " << num2 << endl;
+                    writeFile << endl << endl;
+                }
                 break;
             case 'r':
                 if (checkInput()) {
@@ -42,9 +59,17 @@ int main() {
                     if (first + delta > last) {
                         cout << findSqrtValue(first) << endl;
                         cout << findSqrtValue(last) << endl;
+
+                        if (file) {
+                            writeFile << findSqrtValue(first) << endl;
+                            writeFile << findSqrtValue(last) << endl; 
+                        }
                 } else {
                     for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                         cout << findSqrtValue(i) << endl;
+                        if (file) {
+                            writeFile << findSqrtValue(i) << endl;
+                        }
                         counter++;
                     }
                 }
@@ -58,9 +83,16 @@ int main() {
                     if (first + delta > last) {
                         cout << areaSquare(first) << endl;
                         cout << areaSquare(last) << endl;
+
+                        if (file) {
+                            writeFile << areaSquare(first) << endl;
+                            writeFile << areaSquare(last) << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << areaSquare(i) << endl;
+                            if (file)
+                                writeFile << areaSquare(i) << endl;
                             counter++;
                         }
                     }
@@ -74,9 +106,16 @@ int main() {
                     if (first + delta > last) {
                         cout << areaCircle(first) << endl;
                         cout << areaCircle(last) << endl;
+
+                        if (file) {
+                            writeFile << areaCircle(first) << endl;
+                            writeFile << areaCircle(last) << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << areaCircle(i) << endl;
+                            if (file)
+                                writeFile << areaCircle(i) << endl;
                             counter ++;
                         }
                     }
@@ -90,6 +129,9 @@ int main() {
                     for (int i = first; i <= last && counter <= ENTRIES; i++) {
                         if (findNextEvenValue(i) != 1) {
                             cout << findNextEvenValue(i) << endl;
+
+                            if (file)
+                                writeFile << findNextEvenValue(i) << endl;
                             counter++;
                         }
                     }
@@ -103,9 +145,16 @@ int main() {
                     if (first + delta > last) {
                         cout << lucky(first) << endl;
                         cout << lucky(last) << endl;
+
+                        if (file) {
+                            writeFile << lucky(first) << endl;
+                            writeFile << lucky(last) << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << lucky(i) << endl;
+                            if (file)
+                                writeFile << lucky(i) << endl;
                             counter ++;
                         }
                     }
@@ -119,9 +168,16 @@ int main() {
                     if (first + delta > last) {
                         cout << doMath(first, 's') << endl;
                         cout << doMath(last, 's') << endl;
+
+                        if (file) {
+                            writeFile << doMath(first, 's') << endl;
+                            writeFile << doMath(last, 's') << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << doMath(i, 's') << endl;
+                            if (file)
+                                writeFile << doMath(i, 's') << endl;
                             counter ++;
                         }
                     }
@@ -135,9 +191,16 @@ int main() {
                     if (first + delta > last) {
                         cout << doMath(first, 'n') << endl;
                         cout << doMath(last, 'n') << endl;
+
+                        if (file) {
+                            writeFile << doMath(first, 'n') << endl;
+                            writeFile << doMath(last, 'n') << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << doMath(i, 'n') << endl;
+                            if (file)
+                                writeFile << doMath(i, 'n') << endl;
                             counter ++;
                         }
                     }
@@ -151,9 +214,16 @@ int main() {
                     if (first + delta > last) {
                         cout << doMath(first, 'x') << endl;
                         cout << doMath(last, 'x') << endl;
+
+                        if (file) {
+                            writeFile << doMath(first, 'x') << endl;
+                            writeFile << doMath(last, 'x') << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << doMath(i, 'x') << endl;
+                            if (file)
+                                writeFile << doMath(i, 'x') << endl;
                             counter ++;
                         }
                     }
@@ -167,9 +237,16 @@ int main() {
                     if (first + delta > last) {
                         cout << naturalLog(first) << endl;
                         cout << naturalLog(last) << endl;
+
+                        if (file) {
+                            writeFile << naturalLog(first) << endl;
+                            writeFile << naturalLog(last) << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << naturalLog(i) << endl;
+                            if (file)
+                                writeFile << naturalLog(i) << endl;
                             counter ++;
                         }
                     }
@@ -183,9 +260,16 @@ int main() {
                     if (first + delta > last) {
                         cout << findNyanCatValue(first) << endl;
                         cout << findNyanCatValue(last) << endl;
+
+                        if (file) {
+                            writeFile << findNyanCatValue(first) << endl;
+                            writeFile << findNyanCatValue(last) << endl;
+                        }
                     } else {
                         for (int i = first; i <= last && counter <= ENTRIES; i += delta) {
                             cout << findNyanCatValue(i) << endl;
+                            if (file)
+                                writeFile << findNyanCatValue(i) << endl;
                             counter ++;
                         }
                     }
@@ -199,6 +283,8 @@ int main() {
                     for (int i = first; i <= last && counter <= ENTRIES; i++) {
                         if (findNextOddValue(i) != 0) {
                             cout << findNextOddValue(i) << endl;
+                            if (file)
+                                writeFile << findNextOddValue(i) << endl;
                             counter++;
                         }
                     }
@@ -206,8 +292,25 @@ int main() {
                 }
                 cout << endl << endl;
                 break;
+            case 'i':
+                // PLACEHOLDER
+                break;
+            case 'o':
+                cout << endl << endl;
+                cout << "Please enter a filename to write to: ";
+                cin >> filename;
+                const char *charArray = filename.c_str();
+                writeDataToFile(charArray);
+
+                // Set bool file to true in order to write content from this point forward
+                file = true;
+                break;
         }
-    } while (command != 'q' || command != 'Q');  
+    } while (command != 'q');  
+
+    // If a file has been opened for writing, close it before exiting the program
+    if (writeFile.is_open())
+        writeFile.close();
 
     cout << "Program exiting" << endl;
 

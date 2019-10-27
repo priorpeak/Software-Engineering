@@ -1,6 +1,7 @@
 // External vars
 extern const int ENTRIES;
 extern char command;
+extern const char *charArray[20];
 extern double first, last, delta;
 
 // Required function prototypes

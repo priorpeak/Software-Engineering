@@ -9,6 +9,7 @@
 #define PI 3.141592653589793238462643383279502884197169399
 
 using namespace std;
+extern ofstream writeFile;
 
 // Function to print header
 void initialize() {
@@ -26,8 +27,10 @@ bool checkCode(char command) {
     }
 }
 
-void writeDataToFile(const char *) {
-    
+// This function trips a bool that will cause subsequent commands to be written to a file of the specified name
+void writeDataToFile(const char *charArray) {
+    writeFile.open(charArray);
+    return;
 }
 
 // void readDataFromFile(const char *filename) {
