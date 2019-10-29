@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <fstream>
-#include <string>
+#include <string.h>
 
 #include "pa2Functions.h"
 
@@ -53,7 +53,7 @@ int factorial(int num1) {
 
 // Function to find the fibonacci number at the given index
 int fibonacci(int num1) {
-    int fib[num1] = {0, 1};
+    int fib[64000] = {0, 1};
     int i;
     for (i = 0; i <= num1; i++) {
         fib[i + 2] = fib[i + 1] + fib[i];

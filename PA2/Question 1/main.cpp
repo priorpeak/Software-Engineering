@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <cstdlib>
 
 #include "pa2Functions.h"
