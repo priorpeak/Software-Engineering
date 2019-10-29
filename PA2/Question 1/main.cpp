@@ -2,20 +2,23 @@
 #include <cmath>
 #include <fstream>
 #include <string>
+#include <cstdlib>
 
 #include "pa2Functions.h"
 
 using namespace std;
 
-int num1, num2, counter = 0;
+int num1, num2, counter, lineCount = 0;
 const int ENTRIES = 10;
 double first, last, delta = 0;
 char command;
-string filename;
-const char *charArray[20];
-bool file;
+string filename, fileInput, line;
+const char *charArray[256];
+const char *charArray2[256];
+bool file, fileIn; // file is a boolean that gets tripped when writing to a file, fileIn is a boolean that gets tripped when reading from a file
 
 ofstream writeFile;
+ifstream input;
 
 int main() {
     // Print header
@@ -23,15 +26,20 @@ int main() {
 
     do {
         // Error check user input
-        while (!checkCode(selectCommand())) {
+        if (!checkCode(selectCommand())) {
             cout << "Invalid command code" << endl;
         }
-
+        
         // Match user input with relevant function in pa2Functions.h
         switch (command) {
-            case 'f':
-                cout << "Please enter a number to return the factorial: ";
-                cin >> num1;
+            case 'f': 
+                if (fileIn) {
+                    getline(input, line);
+                    num1 = atof(line.c_str());
+                } else {
+                    cout << "Please enter a number to return the factorial: ";
+                    cin >> num1;
+                }
                 num2 = factorial(num1);
                 cout << "The factorial of "<< num1 << " is " << num2 << endl;
                 cout << endl << endl;
@@ -42,8 +50,13 @@ int main() {
                 }
                 break;
             case 'b':
-                cout << "Please enter a number: ";
-                cin >> num1;
+                if (fileIn) {
+                    getline(input, line);
+                    num1 = atof(line.c_str());
+                } else {
+                    cout << "Please enter a number: ";
+                    cin >> num1;
+                }
                 num2 = fibonacci(num1);
                 cout << "The Fibonacci number at index " << num1 << " is " << num2 << endl;
                 cout << endl << endl;
@@ -292,10 +305,22 @@ int main() {
                 }
                 cout << endl << endl;
                 break;
-            case 'i':
-                // PLACEHOLDER
+            case 'i': {
+                cout << endl << endl;
+                cout << "Please enter a filename to read from: ";
+                cin >> fileInput;
+                const char *charArray2 = fileInput.c_str();
+                readDataFromFile(charArray2);
+
+                // Count number of lines in input file
+                while(getline(input, line))
+                    lineCount++;
+
+                // Set bool fileIn to true in order to read content from file and match to relevant operations
+                fileIn = true;
+            }
                 break;
-            case 'o':
+            case 'o': {
                 cout << endl << endl;
                 cout << "Please enter a filename to write to: ";
                 cin >> filename;
@@ -304,6 +329,9 @@ int main() {
 
                 // Set bool file to true in order to write content from this point forward
                 file = true;
+            }   
+                break;
+            default:
                 break;
         }
     } while (command != 'q');  

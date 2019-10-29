@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <fstream>
+#include <string>
 
 #include "pa2Functions.h"
 
@@ -10,6 +11,8 @@
 
 using namespace std;
 extern ofstream writeFile;
+extern ifstream input;
+string line2;
 
 // Function to print header
 void initialize() {
@@ -27,22 +30,17 @@ bool checkCode(char command) {
     }
 }
 
-// This function trips a bool that will cause subsequent commands to be written to a file of the specified name
+// This function opens a file (name gotten from user input) for output to be written to
 void writeDataToFile(const char *charArray) {
     writeFile.open(charArray);
     return;
 }
 
-// void readDataFromFile(const char *filename) {
-//     string line;
-//     ifstream input;
-//     input.open(filename);
-//     if (input.is_open()) {
-//         while (getline(input, line)) {
-            
-//         }
-//     }
-// }
+// This function takes input from a text file and performs functions based off that input
+void readDataFromFile(const char *charArray2) {
+    input.open(charArray2);
+    return;
+}
 
 // Function to find the factorial of the given value
 int factorial(int num1) {
@@ -132,13 +130,24 @@ double lucky(double num) {
 
 // Function to ask for user input
 char selectCommand() {
-    do {  //  Check that user input is a char
-        cout << "Please enter command code: ";
-        cin >> command;
-    } while (!isalpha(command));
-    command = tolower(command); //  Convert to lowercase for easier case matching
+    if (input.is_open()) {
+        getline(input, line2);
+        command = tolower(*line2.c_str()); // Convert to a char and lowercase for easier case matching
+        if (input.eof()) {
+            input.close();
+            fileIn = false;
+        }
 
-    return command;
+        return command;
+    } else {
+        do {  //  Check that user input is a char
+            cout << "Please enter command code: ";
+            cin >> command;
+        } while (!isalpha(command));
+        command = tolower(command); //  Convert to lowercase for easier case matching
+
+        return command;
+    }
 }
 
 // Check values in first, last, and delta

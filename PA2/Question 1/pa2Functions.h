@@ -1,8 +1,10 @@
 // External vars
 extern const int ENTRIES;
 extern char command;
-extern const char *charArray[20];
+extern const char *charArray[256];
+extern const char *charArray2[256];
 extern double first, last, delta;
+extern bool fileIn;
 
 // Required function prototypes
 void initialize();
