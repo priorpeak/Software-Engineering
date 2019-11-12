@@ -9,12 +9,13 @@ class GameObject {
         int id_num;
         char display_code;
         char state;
+
     public:
-        GameObject(char in_code);
-        GameObject(Point2D in_loc, int in_id, char in_code);
+        GameObject(char);
+        GameObject(Point2D, int, char);
         Point2D GetLocation();
         int GetId();
-        bool GetState();
+        char GetState();
         void ShowStatus();
 };
 

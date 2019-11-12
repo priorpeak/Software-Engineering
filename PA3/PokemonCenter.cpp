@@ -29,10 +29,51 @@ bool PokemonCenter::HasStaminaPoints() {
 
 // Returns the number of stamina points remaining in the PokemonCenter
 unsigned int PokemonCenter::GetNumStaminaPointsRemaining() {
-    return num_stamina_points_remaining;
+    return this -> num_stamina_points_remaining;
 }
 
 // Returns true if this Pokemon can afford to purchase stamina_points with the given budget
 bool PokemonCenter::CanAffordStaminaPoints(unsigned int stamina_points, double budget) {
-    
+    if (this -> num_stamina_points_remaining * dollar_cost_per_stamina_point < budget)
+        return true;
+    else
+        return false;
+}
+
+// Returns the Pokemon dollar cost for the specified number of stamina points
+double PokemonCenter::GetDollarCost(unsigned int stamina_points) {
+    return stamina_points * dollar_cost_per_stamina_point;
+}
+
+// Checks amount of stamina points remaining in PokemonCenter and distributes as needed
+unsigned int PokemonCenter::DistributeStamina(unsigned int points_needed) {
+    if (this -> num_stamina_points_remaining >= points_needed) {
+        this -> num_stamina_points_remaining -= points_needed;
+        return points_needed;
+    } else {
+        unsigned int num_stamina_points_remaining_temp = this -> num_stamina_points_remaining;
+        this -> num_stamina_points_remaining = 0;
+        return num_stamina_points_remaining_temp;
+    }
+}
+
+// Checks how many stamina points are available in the PokemonCenter
+bool PokemonCenter::Update() {
+    if (num_stamina_points_remaining == 0 && state != NO_STAMINA_POINTS_AVAILABLE) {
+        this -> state = NO_STAMINA_POINTS_AVAILABLE;
+        this -> display_code = 'c';
+        cout << "PokemonCenter " << id_num << " has run out of stamina points." << endl;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Prints the status of the object
+void PokemonCenter::ShowStatus() {
+    cout << "Pokemon Center Status: " << endl;
+    Building::ShowStatus();
+    cout << this -> display_code << this -> id_num << " located at " << this -> location << endl;
+    cout << "Pokemon dollars per stamina point: " << dollar_cost_per_stamina_point << endl;
+    cout << "Has " << num_stamina_points_remaining << " stamina point(s) remaining." << endl;
 }

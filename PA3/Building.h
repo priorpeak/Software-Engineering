@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 
-class Building : protected GameObject {
+class Building : public GameObject {
     public:
         Building();
         Building(char, int, Point2D);

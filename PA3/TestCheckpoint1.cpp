@@ -31,6 +31,7 @@ int main() {
 
     GameObject obj1('B');
     obj1.ShowStatus();
+    cout << obj1.GetState() << endl;
 
     return 0;
 }

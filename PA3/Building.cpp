@@ -27,8 +27,7 @@ void Building::RemoveOnePokemon() {
 
 // Shows how many pokemon are in the Building
 void Building::ShowStatus() {
-    cout << this -> display_code << this -> id_num << " located at " << this -> location << endl;
-    cout << this -> pokemon_count;
+    cout << this -> pokemon_count << " pokemon";
     if (this -> pokemon_count == 1)
         cout << " is ";
     else

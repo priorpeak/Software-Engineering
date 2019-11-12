@@ -30,7 +30,7 @@ int GameObject::GetId() {
 }
 
 // Returns the state of this object
-bool GameObject::GetState() {
+char GameObject::GetState() {
     return this -> state;
 }
 
