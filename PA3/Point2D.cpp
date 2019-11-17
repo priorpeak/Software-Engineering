@@ -34,11 +34,11 @@ Point2D operator+(const Point2D p_in, const Vector2D v_in) {
 }
 
 // Overloaded subtraction operator
-Vector2D operator-(const Point2D p_in1, const Vector2D v_in2) {
+Vector2D operator-(const Point2D p_in1, const Point2D p_in2) {
     Vector2D v_out;
 
-    v_out.x = p_in1.x - v_in2.x;
-    v_out.y = p_in1.y - v_in2.y;
+    v_out.x = p_in1.x - p_in2.x;
+    v_out.y = p_in1.y - p_in2.y;
 
     return v_out;
 }

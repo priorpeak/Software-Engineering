@@ -66,7 +66,7 @@ void Pokemon::StartTraining(unsigned int num_training_units) {
         cout << display_code << id_num << ": I am exhausted so no more training for me..." << endl;
     else if (!is_in_gym)
         cout << display_code << id_num << ": I can only train in a Pokemon Gym!" << endl;
-    else if (stamina == 0 || pokemon_dollars == 0)
+    else if (!current_gym -> IsAbleToTrain(num_training_units, pokemon_dollars, stamina))
         cout << display_code << id_num << ": Not enough stamina and/or money for training." << endl;
     else if (current_gym -> IsBeaten())
         cout << display_code << id_num << ": Cannot train! This Pokemon Gym is already beaten!" << endl;
@@ -78,3 +78,152 @@ void Pokemon::StartTraining(unsigned int num_training_units) {
 }
 
 // Tells the Pokemon to start recovering at a PokemonCenter
+void Pokemon::StartRecoveringStamina(unsigned int num_stamina_points) {
+    if (!current_center -> CanAffordStaminaPoints())
+        cout << display_code << id_num << ": Not enough money to recover stamina." << endl;
+    else if (!current_center -> HasStaminaPoints)
+        cout << display_code << id_num << ": Cannot recover! No stamina points remaining in this Pokemon Center." << endl;
+    else if (!is_in_center)
+        cout << display_code << id_num << ": I can only recover stamina at a Pokemon Center!" << endl;
+    else {
+        state = RECOVERING_STAMINA;
+        cout << display_code << id_num << ": Started recovering " << num_stamina_points << " stamina point(s) at Pokemon Center " << current_center -> GetId() << endl;
+        stamina_points_to_buy = min(num_stamina_points, current_center -> GetNumStaminaPointsRemaining());
+    }
+}
+
+// Tells the Pokemon to stop doing whatever it was doing
+void Pokemon::Stop() {
+    state = STOPPED;
+    cout << display_code << id_num << "Stopping..." << endl;
+}
+
+// Returns true if stamina is 0
+bool Pokemon::IsExhausted() {
+    if (stamina == 0)
+        return true;
+    else
+        return false;
+}
+
+// Returns true if this pokemon is NOT exhausted
+bool Pokemon::ShouldBeVisible() {
+    if (state != EXHAUSTED)
+        return true;
+    else
+        return false;
+}
+
+// Prints state specific status information
+void Pokemon::ShowStatus() {
+    cout << name << " status: " << endl;
+    GameObject::ShowStatus();
+    switch (state) {
+        case STOPPED:
+            cout << " stopped" << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case MOVING:
+            cout << " moving at a speed of " << speed << " to destination " << destination << " at each step of " << delta << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case MOVING_TO_CENTER:
+            cout << " heading to Pokemon Center " << current_center -> GetId() << " at a speed of " << speed << " at each step of " << delta << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case MOVING_TO_GYM:
+            cout << " heading to Pokemon Gym " << current_gym -> GetId() << " at a speed of " << speed << " at each step of " << delta << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case IN_CENTER:
+            cout << " inside Pokemon Center " << current_center -> GetId() << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case IN_GYM:
+            cout << " inside Pokemon Gym " << current_gym -> GetId() << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case TRAINING_IN_GYM:
+            cout << " training in Pokemon Gym " << current_gym -> GetId() << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+        case RECOVERING_STAMINA:
+            cout << " recovering stamina in Pokemon Center " << current_center -> GetId() << endl;
+            cout << "Stamina: " << stamina << endl;
+            cout << "Pokemon Dollars: " << pokemon_dollars << endl;
+            cout << "Experience Points: " << experience_points << endl;
+            break;
+    }
+}
+
+// Generally returns true whenever the state is changed and false if it stays in the same state
+bool Pokemon::Update() {
+    switch (state) {
+        case STOPPED:
+            return false;
+            break;
+        case MOVING:
+            if (UpdateLocation()) {
+                Stop();
+                return true;
+            } else
+                return false;
+        case MOVING_TO_CENTER:
+            if (UpdateLocation()) {
+                state = IN_CENTER;
+                return true;
+            } else
+                return false;
+        case MOVING_TO_GYM:
+            if (UpdateLocation()) {
+                state = IN_GYM;
+                return true;
+            } else
+                return false;
+        case IN_CENTER:
+            return false;
+        case IN_GYM:
+            return false;
+    }
+}
+
+// Updates the object's location while it is moving
+bool Pokemon::UpdateLocation() {
+    pokemon_dollars += GetRandomAmountOfPokemonDollars();
+    stamina--;
+    if (fabs(destination.x - location.x) <= fabs(delta.x) && fabs(destination.y - location.y) <= fabs(delta.y)) {
+        location = destination;
+        cout << display_code << id_num << ": Has arrived at its destination!" << endl;
+        return true;
+    } else {
+        location = location + delta;
+        cout << display_code << id_num << ": Has moved!" << endl;
+        return false;
+    }
+}
+
+// Sets up the object to start moving to dest.
+void Pokemon::SetupDestination(Point2D dest) {
+    destination = dest;
+    delta = (destination - location) * (speed / GetDistanceBetween(destination, location));
+}
+
+// Returns a random number between 0.0 and 2.0 inclusive
+static double GetRandomAmountOfPokemonDollars() {
+    srand (time(NULL));
+    return rand() % 2;
+}

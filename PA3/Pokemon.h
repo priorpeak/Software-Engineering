@@ -6,6 +6,9 @@
 #include "PokemonGym.h"
 #include <stdlib.h>
 #include <math.h>
+#include <algorithm>
+#include <stdlib.h>
+#include <time.h>
 
 enum PokemonStates {
     STOPPED = 0,
