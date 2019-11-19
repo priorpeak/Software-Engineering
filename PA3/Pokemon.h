@@ -1,11 +1,9 @@
 #ifndef POKEMON_H
 #define POKEMON_H
 
-#include "GameObject.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
 #include <stdlib.h>
-#include <math.h>
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>

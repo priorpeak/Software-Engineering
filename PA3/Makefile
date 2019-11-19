@@ -1,13 +1,13 @@
 # in EC327, we use the g++ compiler
 # therefore, we define the GCC variable
 GCC = g++
-# a target to compile the Checkpoint1 which depends on all object-files
+# a target to compile the Checkpoint which depends on all object-files
 # and which links all object-files into an executable
-Checkpoint1: TestCheckpoint1.o Point2D.o Vector2D.o GameObject.o
-	$(GCC) TestCheckpoint1.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o -o Checkpoint1
-# a target to compile the TestCheckpoint1.cpp into an object-file
-TestCheckpoint1.o: TestCheckpoint1.cpp
-	$(GCC) -c TestCheckpoint1.cpp
+Checkpoint3: TestCheckpoint3.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o
+	$(GCC) TestCheckpoint3.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o -o Checkpoint3
+# a target to compile the TestCheckpoint3.cpp into an object-file
+TestCheckpoint3.o: TestCheckpoint3.cpp
+	$(GCC) -c TestCheckpoint3.cpp
 # a target to compile the GameObject.cpp into an object-file
 GameObject.o: GameObject.cpp
 	$(GCC) -c GameObject.cpp
@@ -26,3 +26,6 @@ PokemonCenter.o: PokemonCenter.cpp
 # a target to compile the PokemonGym.cpp into an object-file
 PokemonGym.o: PokemonGym.cpp
 	$(GCC) -c PokemonGym.cpp
+# a target to compile the Pokemon.cpp into an object-file
+Pokemon.o: Pokemon.cpp
+	$(GCC) -c Pokemon.cpp

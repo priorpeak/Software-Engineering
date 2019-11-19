@@ -3,6 +3,7 @@
 // Construct a Pokemon
 Pokemon::Pokemon() : GameObject('P') {
     speed = 5;
+    state = STOPPED;
     cout << "Pokemon default constructed." << endl;
 }
 
@@ -18,6 +19,7 @@ Pokemon::Pokemon(char in_code) : GameObject('P') {
 Pokemon::Pokemon(string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) : GameObject(in_loc, in_id, in_code) {
     speed = in_speed;
     name = in_name;
+    state = STOPPED;
     cout << "Pokemon constructed." << endl;
 }
 
@@ -41,7 +43,7 @@ void Pokemon::StartMovingToCenter(PokemonCenter* center) {
     else if (UpdateLocation())
         cout << display_code << id_num << ": I am already at the Pokemon Center!" << endl;
     else {
-        cout << display_code << id_num << ": On my way to center " << center -> id_num << endl;
+        cout << display_code << id_num << ": On my way to center " << center -> GetId() << endl;
         SetupDestination(center -> GetLocation());
         state = MOVING_TO_CENTER;
     }
@@ -71,7 +73,7 @@ void Pokemon::StartTraining(unsigned int num_training_units) {
     else if (current_gym -> IsBeaten())
         cout << display_code << id_num << ": Cannot train! This Pokemon Gym is already beaten!" << endl;
     else {
-        cout << display_code << id_num << ": Started to train at Pokemon Gym " << current_gym -> GetId() << " with " << current_gym -> GetNumTrainingUnitsRemaining << " training units." << endl;
+        cout << display_code << id_num << ": Started to train at Pokemon Gym " << current_gym -> GetId() << " with " << current_gym -> GetNumTrainingUnitsRemaining() << " training units." << endl;
         state = TRAINING_IN_GYM;
         training_units_to_buy = min(num_training_units, current_gym -> GetNumTrainingUnitsRemaining());
     }
@@ -79,9 +81,9 @@ void Pokemon::StartTraining(unsigned int num_training_units) {
 
 // Tells the Pokemon to start recovering at a PokemonCenter
 void Pokemon::StartRecoveringStamina(unsigned int num_stamina_points) {
-    if (!current_center -> CanAffordStaminaPoints())
+    if (!current_center -> CanAffordStaminaPoints(num_stamina_points, pokemon_dollars))
         cout << display_code << id_num << ": Not enough money to recover stamina." << endl;
-    else if (!current_center -> HasStaminaPoints)
+    else if (!current_center -> HasStaminaPoints())
         cout << display_code << id_num << ": Cannot recover! No stamina points remaining in this Pokemon Center." << endl;
     else if (!is_in_center)
         cout << display_code << id_num << ": I can only recover stamina at a Pokemon Center!" << endl;
@@ -198,6 +200,20 @@ bool Pokemon::Update() {
             return false;
         case IN_GYM:
             return false;
+        case TRAINING_IN_GYM:
+            stamina -= current_gym -> GetStaminaCost(stamina_points_to_buy);
+            pokemon_dollars -= current_gym -> GetDollarCost(training_units_to_buy);
+            experience_points += current_gym -> TrainPokemon(training_units_to_buy);
+            cout << "** " << name << " completed " << training_units_to_buy << " training unit(s)! **" << endl;
+            cout << "** " << name << " gained " << current_gym -> TrainPokemon(training_units_to_buy) << " experience point(s)! **" << endl;
+            state = IN_GYM;
+            return true;
+        case RECOVERING_STAMINA:
+            stamina += current_center -> DistributeStamina(stamina_points_to_buy);
+            pokemon_dollars -= current_center -> GetDollarCost(stamina_points_to_buy);
+            cout << "** " << name << " recovered " << current_center -> DistributeStamina(stamina_points_to_buy) << " stamina point(s)! **" << endl;
+            state = IN_CENTER;
+            return true;
     }
 }
 
@@ -219,7 +235,9 @@ bool Pokemon::UpdateLocation() {
 // Sets up the object to start moving to dest.
 void Pokemon::SetupDestination(Point2D dest) {
     destination = dest;
-    delta = (destination - location) * (speed / GetDistanceBetween(destination, location));
+    Vector2D prod1 = (destination - location);
+    // double prod2 = (speed / GetDistanceBetween(destination, location));
+    delta = prod1;
 }
 
 // Returns a random number between 0.0 and 2.0 inclusive
