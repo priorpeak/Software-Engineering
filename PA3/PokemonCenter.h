@@ -11,7 +11,8 @@ enum PokemonCenterStates {
 class PokemonCenter : public Building {
     public:
         PokemonCenter();
-        PokemonCenter(int, Point2D);
+        PokemonCenter(int, double, unsigned int, Point2D);
+        ~PokemonCenter();
         bool HasStaminaPoints();
         unsigned int GetNumStaminaPointsRemaining();
         bool CanAffordStaminaPoints(unsigned int, double);

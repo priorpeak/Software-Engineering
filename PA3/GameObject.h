@@ -13,6 +13,7 @@ class GameObject {
     public:
         GameObject(char);
         GameObject(Point2D, int, char);
+        ~GameObject();
         Point2D GetLocation();
         int GetId();
         char GetState();

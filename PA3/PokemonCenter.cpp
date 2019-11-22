@@ -11,12 +11,17 @@ PokemonCenter::PokemonCenter() : Building() {
 }
 
 // Construct a PokemonCenter
-PokemonCenter::PokemonCenter(int in_id, Point2D in_loc) : Building('C', in_id, in_loc) {
-    this -> stamina_capacity = 100;
+PokemonCenter::PokemonCenter(int in_id, double stamina_cost, unsigned int stamina_cap, Point2D in_loc) : Building('C', in_id, in_loc) {
+    this -> stamina_capacity = stamina_cap;
     this -> num_stamina_points_remaining = stamina_capacity;
-    this -> dollar_cost_per_stamina_point = 5;
+    this -> dollar_cost_per_stamina_point = stamina_cost;
     this -> state = STAMINA_POINTS_AVAILABLE;
     cout << "PokemonCenter constructed" << endl;
+}
+
+// PokemonCenter destructor
+PokemonCenter::~PokemonCenter() {
+    cout << "PokemonCenter destructed." << endl;
 }
 
 // Returns true if PokemonCenter has at least one stamina point

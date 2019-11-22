@@ -6,7 +6,7 @@ GameObject::GameObject(char in_code) {
     this -> id_num = 1;
     this -> state = 0;
 
-    cout << "GameObject constructed" << endl;
+    cout << "GameObject constructed." << endl;
 }
 
 // Construct a GameObject
@@ -16,7 +16,12 @@ GameObject::GameObject(Point2D in_loc, int in_id, char in_code) {
     this -> display_code = in_code;
     this -> state = 0;
 
-    cout << "GameObject constructed" << endl;
+    cout << "GameObject constructed." << endl;
+}
+
+// GameObject destructor
+GameObject::~GameObject() {
+    cout << "GameObject destructed." << endl;
 }
 
 // Returns the location of this object

@@ -15,5 +15,6 @@ double GetDistanceBetween(Point2D, Point2D);
 ostream& operator<<(ostream&, const Point2D);
 Point2D operator+(const Point2D, const Vector2D);
 Vector2D operator-(const Point2D, const Point2D);
+bool operator==(const Point2D, const Point2D);
 
 #endif

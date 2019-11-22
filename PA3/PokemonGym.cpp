@@ -25,6 +25,11 @@ PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cos
     cout << "PokemonGym constructed" << endl;
 }
 
+// PokemonGym destructor
+PokemonGym::~PokemonGym() {
+    cout << "PokemonGym destructed." << endl;
+}
+
 // Returns the cost of purchasing "unit_qty" training units
 double PokemonGym::GetDollarCost(unsigned int unit_qty) {
     return unit_qty * this -> dollar_cost_per_training_unit;

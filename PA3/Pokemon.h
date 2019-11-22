@@ -25,6 +25,7 @@ class Pokemon : public GameObject {
         Pokemon();
         Pokemon(char);
         Pokemon(string, int, char, unsigned int, Point2D);
+        ~Pokemon();
         void StartMoving(Point2D);
         void StartMovingToCenter(PokemonCenter*);
         void StartMovingToGym(PokemonGym*);
@@ -50,8 +51,8 @@ class Pokemon : public GameObject {
         unsigned int training_units_to_buy;
         unsigned int stamina_points_to_buy;
         string name;
-        PokemonCenter* current_center = 0;
-        PokemonGym* current_gym = 0;
+        PokemonCenter* current_center;
+        PokemonGym* current_gym;
         Point2D destination;
         Vector2D delta;
 };

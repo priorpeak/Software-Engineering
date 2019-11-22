@@ -42,3 +42,11 @@ Vector2D operator-(const Point2D p_in1, const Point2D p_in2) {
 
     return v_out;
 }
+
+// Overloaded comparison operator
+bool operator==(const Point2D p_in1, const Point2D p_in2) {
+    if (p_in1.x == p_in2.x && p_in1.y == p_in2.y)
+        return true;
+    else
+        return false;
+}
