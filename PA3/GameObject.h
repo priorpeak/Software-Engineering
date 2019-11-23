@@ -13,11 +13,13 @@ class GameObject {
     public:
         GameObject(char);
         GameObject(Point2D, int, char);
-        ~GameObject();
+        virtual ~GameObject();
         Point2D GetLocation();
         int GetId();
         char GetState();
-        void ShowStatus();
+        virtual void ShowStatus();
+        virtual bool ShouldBeVisible() = 0;
+        virtual bool Update() = 0;
 };
 
 #endif

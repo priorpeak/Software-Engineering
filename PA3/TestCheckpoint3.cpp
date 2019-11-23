@@ -2,7 +2,7 @@
 
 int main () {
 
-    PokemonCenter C1(1, Point2D(6, 6));     
+    PokemonCenter C1(2, 20, 200, Point2D(6, 6));     
 
     PokemonGym G1(10, 1, 1.6, 5, 1, Point2D(4, 7));
 

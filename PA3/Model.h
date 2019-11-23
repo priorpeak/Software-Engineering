@@ -13,11 +13,12 @@ class Model {
         PokemonCenter* GetPokemonCenterPtr(int);
         PokemonGym* GetPokemonGymPtr(int);
         bool Update();
-        void Display(View& view);
+        // void Display(View& view);
         void ShowStatus();
+        Model(const Model&);
 
     private:
-        int time;
+        double time;
         GameObject* object_ptrs[10];
         int num_objects;
         Pokemon* pokemon_ptrs[10];
@@ -26,7 +27,6 @@ class Model {
         int num_centers;
         PokemonGym* gym_ptrs[10];
         int num_gyms;
-        Model(const Model&);
 };
 
 #endif

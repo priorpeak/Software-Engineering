@@ -36,6 +36,7 @@ class Pokemon : public GameObject {
         bool ShouldBeVisible();
         void ShowStatus();
         bool Update();
+        string GetName();
 
     protected:
         bool UpdateLocation();
@@ -43,8 +44,8 @@ class Pokemon : public GameObject {
 
     private:
         double speed;
-        bool is_in_gym;
-        bool is_in_center;
+        bool is_in_gym = false;
+        bool is_in_center = false;
         unsigned int stamina;
         unsigned int experience_points;
         double pokemon_dollars;

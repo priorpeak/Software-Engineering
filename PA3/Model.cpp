@@ -96,11 +96,19 @@ bool Model::Update() {
 
     for (int i = 0; i < 10; i++) {   
         if (object_ptrs[i] -> Update())
-        return true;
-    }
-
-    for (int i = 0; i < 10; i++) {
-        if (object_ptrs[i] -> Update())
             return true;
+        else
+            return false;
     }
+}
+
+// Outputs time and generates the view display for all GameObjects
+// void Model::Display(View& view) {
+//     // PLACEHOLDER
+// }
+
+// Outputs the status of all GameObjects by calling their ShowStatus() function
+void Model::ShowStatus() {
+    for (int i = 0; i < 10; i++)
+        object_ptrs[i] -> ShowStatus();
 }

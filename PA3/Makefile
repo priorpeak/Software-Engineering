@@ -3,11 +3,11 @@
 GCC = g++
 # a target to compile the Checkpoint which depends on all object-files
 # and which links all object-files into an executable
-Checkpoint3: TestCheckpoint3.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o
-	$(GCC) TestCheckpoint3.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o -o Checkpoint3
+Checkpoint4: TestCheckpoint4.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o
+	$(GCC) TestCheckpoint4.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o -o Checkpoint4
 # a target to compile the TestCheckpoint3.cpp into an object-file
-TestCheckpoint3.o: TestCheckpoint3.cpp
-	$(GCC) -c TestCheckpoint3.cpp
+TestCheckpoint4.o: TestCheckpoint4.cpp
+	$(GCC) -c TestCheckpoint4.cpp
 # a target to compile the GameObject.cpp into an object-file
 GameObject.o: GameObject.cpp
 	$(GCC) -c GameObject.cpp
@@ -29,3 +29,12 @@ PokemonGym.o: PokemonGym.cpp
 # a target to compile the Pokemon.cpp into an object-file
 Pokemon.o: Pokemon.cpp
 	$(GCC) -c Pokemon.cpp
+# a target to compile the Model.cpp into an object-file
+Model.o: Model.cpp
+	$(GCC) -c Model.cpp
+# a target to compile the GameCommand.cpp into an object-file
+GameCommand.o: GameCommand.cpp
+	$(GCC) -c GameCommand.cpp
+# clean target
+clean:
+	rm -f *.o
