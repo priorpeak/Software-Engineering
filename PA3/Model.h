@@ -2,8 +2,6 @@
 #define MODEL_H
 
 #include "Pokemon.h"
-#include "PokemonCenter.h"
-#include "PokemonGym.h"
 
 class Model {
     public:

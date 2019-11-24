@@ -20,6 +20,7 @@ class GameObject {
         virtual void ShowStatus();
         virtual bool ShouldBeVisible() = 0;
         virtual bool Update() = 0;
+        void DrawSelf(char*);
 };
 
 #endif

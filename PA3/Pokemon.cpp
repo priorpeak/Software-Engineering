@@ -45,9 +45,11 @@ Pokemon::~Pokemon() {
 
 // Tells the Pokemon to start moving
 void Pokemon::StartMoving(Point2D dest) {
-    if (location == destination)
+    if (location == destination) {
         cout << display_code << id_num << ": I'm already there. See?" << endl;
-    else if (state == EXHAUSTED)
+        state = STOPPED;
+    }
+    else if (IsExhausted())
         cout << display_code << id_num << ": I am exhausted. I may move but you cannot see me." << endl;
     else {
         cout << display_code << id_num << ": On my way." << endl;

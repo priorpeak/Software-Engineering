@@ -43,3 +43,9 @@ char GameObject::GetState() {
 void GameObject::ShowStatus() {
     cout << this -> display_code << this -> id_num << " at " << this -> location << endl;
 }
+
+// Adds display_code and id_num to char pointer
+void GameObject::DrawSelf(char* ptr) {
+    *ptr = display_code;
+    *(ptr + 1) = id_num;
+}
