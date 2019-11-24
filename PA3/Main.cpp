@@ -8,8 +8,10 @@ int main() {
     int id, id1, id2, x, y;
     unsigned int stamina_amount, unit_amount;
 
+    // Initialize new model object using the default constructor.
     Model mainModel = Model();
 
+    // Do-while loop to check for user input and match to relevant commands
     do {
         cout << "Please enter a command character: ";
         cin >> command;
@@ -59,8 +61,10 @@ int main() {
         }
     } while (command != 'q');
 
+    // If user enters q, exit program
     if (command == 'q') {
         mainModel.~Model();
+        cout << "Thanks for playing! See you next time!" << endl;
         exit(0);
     }
 
