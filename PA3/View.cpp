@@ -20,22 +20,14 @@ void View::Clear() {
 }
 
 // Plots objects on the grid
-
-// Could not get this to work, commented out in Main.cpp so that code would compile :(
-
 void View::Plot(GameObject* ptr) {
     int x, y;
     char comp1 = '.';
     char comp2 = ' ';
-    // cout << "out variable just declared" << endl;
-
     if (GetSubscripts(x, y, ptr -> GetLocation())) {
-        // cout << "Get subscripts passed" << endl;
         if (grid[x][y][0] == comp1) {
-            // cout << "In if statement" << endl;
             char* draw;
             ptr -> DrawSelf(draw);
-            // cout << "This is draw: " << *draw << *(draw + 1) << endl;
             grid[x][y][0] = *draw;
             grid[x][y][1] = *(draw + 1);
         } else {
@@ -94,12 +86,8 @@ void View::Draw() {
 
 // Calculates column and row subscripts of the grid array
 bool View::GetSubscripts(int &out_x, int &out_y, Point2D location) {
-    // cout << "In GetSubscripts" << endl;
-
     out_x = int((location.x - origin.x) / scale);
     out_y = int((location.y - origin.y) / scale);
-
-    // cout << "out vars created" << out_x << out_y << endl;
 
     if (out_x < size * scale && out_y < size * scale)
         return true;

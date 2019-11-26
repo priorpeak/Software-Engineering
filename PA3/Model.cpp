@@ -4,12 +4,33 @@
 Model::Model() {
     time = 0;
 
-    object_ptrs[0], pokemon_ptrs[0] = new Pokemon("Pikachu", 1, 'P', 2, Point2D(5, 1));
-    object_ptrs[1], pokemon_ptrs[1] = new Pokemon("Bulbasaur", 2, 'P', 1, Point2D(10, 1));
-    object_ptrs[2], center_ptrs[0] = new PokemonCenter(1, 1, 100, Point2D(1, 20));
-    object_ptrs[3], center_ptrs[1] = new PokemonCenter(2, 2, 200, Point2D(10, 20));
-    object_ptrs[4], gym_ptrs[0] = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
-    object_ptrs[5], gym_ptrs[1] = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
+    // Initialize the 6 game objects
+    Pokemon* P1 = new Pokemon("Pikachu", 1, 'P', 2, Point2D(5, 1));
+    Pokemon* P2 = new Pokemon("Bulbasaur", 2, 'P', 1, Point2D(10, 1));
+    PokemonCenter* C1 = new PokemonCenter(1, 1, 100, Point2D(1, 20));
+    PokemonCenter* C2 = new PokemonCenter(2, 2, 200, Point2D(10, 20));
+    PokemonGym* G1 = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
+    PokemonGym* G2 = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
+
+    // Assign Pokemon to their array
+    pokemon_ptrs[0] = P1;
+    pokemon_ptrs[1] = P2;
+
+    // Assign Pokemon Centers to their array
+    center_ptrs[0] = C1;
+    center_ptrs[1] = C2;
+
+    // Assign Pokemon Gyms to their array
+    gym_ptrs[0] = G1;
+    gym_ptrs[1] = G2;
+
+    // Assign all GameObjects to their array
+    object_ptrs[0] = P1;
+    object_ptrs[1] = P2;
+    object_ptrs[2] = C1;
+    object_ptrs[3] = C2;
+    object_ptrs[4] = G1;
+    object_ptrs[5] = G2;
 
     num_objects = 6;
     num_pokemon = 2;
