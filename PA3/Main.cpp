@@ -66,8 +66,6 @@ int main() {
 
         mainModel.Display(mainView);
 
-        if (mainModel.Update())
-            mainModel.ShowStatus();
     } while (command != 'q');
     cout << "Exiting program." << endl;
     mainModel.~Model();

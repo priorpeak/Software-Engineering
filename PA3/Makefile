@@ -3,11 +3,11 @@
 GCC = g++ -std=c++0x
 # a target to compile the Checkpoint which depends on all object-files
 # and which links all object-files into an executable
-Game: main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o
-	$(GCC) main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o -o Game
+Game: Main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o
+	$(GCC) Main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o -o Game
 # a target to compile the TestCheckpoint3.cpp into an object-file
-main.o: main.cpp
-	$(GCC) -c main.cpp
+Main.o: Main.cpp
+	$(GCC) -c Main.cpp
 # a target to compile the GameObject.cpp into an object-file
 GameObject.o: GameObject.cpp
 	$(GCC) -c GameObject.cpp
