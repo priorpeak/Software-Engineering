@@ -71,9 +71,6 @@ int main() {
             default:
                 break;
         }
-
-        if (mainModel.Update())
-            mainModel.ShowStatus();
     } while (command != 'q');
 
     if (command == 'q') {
