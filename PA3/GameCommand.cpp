@@ -67,11 +67,15 @@ void DoRecoverInCenterCommand(Model& model, int pokemon_id, unsigned int stamina
 }
 
 // Advances one tick
-// void DoGoCommand(Model& model, View& view) {
-//     cout << "Advancing one tick." << endl;
-// }
+void DoGoCommand(Model& model, View& view) {
+    cout << "Advancing one tick." << endl;
+    model.Update();
+}
 
 // // Advances one tick
-// void DoRunCommand(Model& model, View& view) {
-//     cout << "Advancing to next event." << endl;
-// }
+void DoRunCommand(Model& model, View& view) {
+    cout << "Advancing to next event." << endl;
+    int counter = 0;
+    while (!model.Update() && counter < 6)
+        counter++;
+}

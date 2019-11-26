@@ -148,12 +148,12 @@ bool Pokemon::ShouldBeVisible() {
 
 // Prints state specific status information
 void Pokemon::ShowStatus() {
-    cout << name << " status: " << endl;
+    cout << this -> name << " status: " << endl;
     GameObject::ShowStatus();
     
-    cout << "Stamina: " << stamina << endl;
-    cout << "Pokemon Dollars: " << pokemon_dollars << endl;
-    cout << "Experience Points: " << experience_points << endl;
+    cout << "Stamina: " << this -> stamina << endl;
+    cout << "Pokemon Dollars: " << this -> pokemon_dollars << endl;
+    cout << "Experience Points: " << this -> experience_points << endl;
 
     switch (state) {
         case STOPPED:
@@ -318,5 +318,6 @@ void Pokemon::SetupDestination(Point2D dest) {
 // Returns a random number between 0.0 and 2.0 inclusive
 static double GetRandomAmountOfPokemonDollars() {
     srand (time(NULL));
-    return rand() % 2 + 1;
+    double f = (double)rand() / RAND_MAX;
+    return 0 + f * (2 - 0);
 }

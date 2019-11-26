@@ -21,6 +21,7 @@ class GameObject {
         virtual bool ShouldBeVisible() = 0;
         virtual bool Update() = 0;
         void DrawSelf(char*);
+        char GetDisplayCode();
 };
 
 #endif

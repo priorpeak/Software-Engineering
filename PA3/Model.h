@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include "Pokemon.h"
+#include "View.h"
 
 class Model {
     public:
@@ -11,7 +12,7 @@ class Model {
         PokemonCenter* GetPokemonCenterPtr(int);
         PokemonGym* GetPokemonGymPtr(int);
         bool Update();
-        // void Display(View& view);
+        void Display(View& view);
         void ShowStatus();
         Model(const Model&);
 

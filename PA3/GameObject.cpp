@@ -44,8 +44,13 @@ void GameObject::ShowStatus() {
     cout << this -> display_code << this -> id_num << " at " << this -> location << endl;
 }
 
+// Get function for display_code
+char GameObject::GetDisplayCode() {
+    return this -> display_code;
+}
+
 // Adds display_code and id_num to char pointer
-void GameObject::DrawSelf(char* ptr) {
-    *ptr = display_code;
-    *(ptr + 1) = id_num;
+void GameObject::DrawSelf(char* char_ptr) {
+    *char_ptr = this -> GetDisplayCode();
+    *(char_ptr + 1) = '0' + this -> GetId();
 }

@@ -27,7 +27,7 @@ Model::Model(const Model& cpy) {
     num_centers = cpy.num_centers;
     num_gyms = cpy.num_gyms;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < num_objects; i++) {
         object_ptrs[i] = cpy.object_ptrs[i];
         pokemon_ptrs[i] = cpy.pokemon_ptrs[i];
         center_ptrs[i] = cpy.center_ptrs[i];
@@ -37,7 +37,7 @@ Model::Model(const Model& cpy) {
 
 // Model destructor
 Model::~Model() {
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < num_objects; i++)
         delete object_ptrs[i];
 
     cout << "Model destructed." << endl;
@@ -48,9 +48,8 @@ Pokemon* Model::GetPokemonPtr(int id) {
     for (int i = 0; i < num_pokemon; i++) {
         if (pokemon_ptrs[i] -> GetId() == id)
             return pokemon_ptrs[i];
-        else
-            return 0;
     }
+    return 0;
 }
 
 // Lookup/Validation for PokemonCenter objects
@@ -58,9 +57,8 @@ PokemonCenter* Model::GetPokemonCenterPtr(int id) {
     for (int i = 0; i < num_centers; i++) {
         if (center_ptrs[i] -> GetId() == id)
             return center_ptrs[i];
-        else
-            return 0;
     }
+    return 0;
 }
 
 // Lookup/Validation for PokemonGym objects
@@ -68,33 +66,32 @@ PokemonGym* Model::GetPokemonGymPtr(int id) {
     for (int i = 0; i < num_gyms; i++) {
         if (gym_ptrs[i] -> GetId() == id)
             return gym_ptrs[i];
-        else
-            return 0;
     }
+    return 0;
 }
 
 // Increments time, iterates thru object_ptrs array and calls Update() for each object
 bool Model::Update() {
     time++;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < num_gyms; i++) {
         if (gym_ptrs[i] -> IsBeaten()) {
             cout << "GAME OVER: You win! All Pokemon Gyms beaten!" << endl;
             exit(0);
         }
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < num_pokemon; i++) {
         if (pokemon_ptrs[i] -> IsExhausted()) {
             cout << "GAME OVER: You lose! All of your Pokemon are tired!" << endl;
             exit(0);
         }
     }
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < num_objects; i++)
         object_ptrs[i] -> Update();
 
-    for (int i = 0; i < 10; i++) {   
+    for (int i = 0; i < num_objects; i++) {   
         if (object_ptrs[i] -> Update())
             return true;
         else
@@ -103,12 +100,19 @@ bool Model::Update() {
 }
 
 // Outputs time and generates the view display for all GameObjects
-// void Model::Display(View& view) {
-//     // PLACEHOLDER
-// }
+void Model::Display(View& view) {
+    cout << "Time: " << time << endl;
+    view.Clear();
+
+    for (int i = 0; i < num_objects; i++) {
+        view.Plot(object_ptrs[i]);
+    }
+
+    view.Draw();
+}
 
 // Outputs the status of all GameObjects by calling their ShowStatus() function
 void Model::ShowStatus() {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < num_objects; i++)
         object_ptrs[i] -> ShowStatus();
 }
