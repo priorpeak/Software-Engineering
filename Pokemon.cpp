@@ -9,6 +9,10 @@ Pokemon::Pokemon() : GameObject('P') {
     current_gym = 0;
     pokemon_dollars = 0;
     experience_points = 0;
+    health = 20;
+    store_health = 20;
+    physical_damage = 5;
+    magical_damage = 4;
     cout << "Pokemon default constructed." << endl;
 }
 
@@ -22,6 +26,10 @@ Pokemon::Pokemon(char in_code) : GameObject('P') {
     current_gym = 0;
     pokemon_dollars = 0;
     experience_points = 0;
+    health = 20;
+    store_health = 20;
+    physical_damage = 5;
+    magical_damage = 4;
     cout << "Pokemon constructed." << endl;
 }
 
@@ -35,6 +43,10 @@ Pokemon::Pokemon(string in_name, int in_id, char in_code, unsigned int in_speed,
     current_gym = 0;
     pokemon_dollars = 0;
     experience_points = 0;
+    health = 20;
+    store_health = 20;
+    physical_damage = 5;
+    magical_damage = 4;
     cout << "Pokemon constructed." << endl;
 }
 

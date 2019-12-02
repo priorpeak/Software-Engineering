@@ -17,7 +17,11 @@ enum PokemonStates {
     MOVING_TO_GYM = 5,
     MOVING_TO_CENTER = 6,
     TRAINING_IN_GYM = 7,
-    RECOVERING_STAMINA = 8
+    RECOVERING_STAMINA = 8,
+    IN_ARENA = 9,
+    MOVING_TO_ARENA = 10,
+    BATTLE = 11,
+    FAINTED = 12
 };
 
 class Pokemon : public GameObject {
@@ -38,9 +42,24 @@ class Pokemon : public GameObject {
         bool Update();
         string GetName();
 
+        Pokemon(string, double, double, double, double, double, int, char, Point2D);
+        bool IsAlive();
+        void TakeHit(double, double, double);
+        void ReadyBattle(Rival*);
+        bool StartBattle();
+
     protected:
         bool UpdateLocation();
         void SetupDestination(Point2D);
+
+        double health = 20;
+        double store_health = 20;
+        double physical_damage = 5;
+        double magical_damage = 4;
+        double defense;
+        Rival* target;
+        bool is_in_arena = false;
+        BattleArena* current_arena;
 
     private:
         double speed;
