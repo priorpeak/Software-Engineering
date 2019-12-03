@@ -16,6 +16,8 @@ class Model {
         void ShowStatus();
         Model(const Model&);
 
+        Rival* GetRivalPtr(int);
+
     private:
         double time;
         GameObject* object_ptrs[10];
@@ -26,6 +28,8 @@ class Model {
         int num_centers;
         PokemonGym* gym_ptrs[10];
         int num_gyms;
+        Rival* rival_ptrs[10];
+        int num_rivals;
 };
 
 #endif

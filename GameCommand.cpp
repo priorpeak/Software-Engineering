@@ -72,10 +72,22 @@ void DoGoCommand(Model& model, View& view) {
     model.Update();
 }
 
-// // Advances one tick
+// Advances one tick
 void DoRunCommand(Model& model, View& view) {
     cout << "Advancing to next event." << endl;
     int counter = 0;
     while (!model.Update() && counter < 6)
         counter++;
+}
+
+// Starts a battle in the arena
+void DoStartBattle(Model& model, int pokemon_id, int rival_id) {
+    if (model.GetPokemonPtr(pokemon_id) != 0 && model.GetRivalPtr(rival_id) != 0) {
+        Pokemon* poke1 = model.GetPokemonPtr(pokemon_id);
+        Rival* rival1 = model.GetRivalPtr(rival_id);
+        cout << "Preparing to fight!" << endl;
+        poke1 -> ReadyBattle(rival1);
+    } else {
+        cout << "Invalid pokemon and/or rival IDs." << endl;
+    }
 }

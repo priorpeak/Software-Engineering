@@ -1,0 +1,36 @@
+#ifndef RIVAL_H
+#define RIVAL_H
+
+#include "Pokemon.h"
+#include "BattleArena.h"
+
+enum RivalStates {
+    ALIVE_RIVAL = 0,
+    FAINTED_RIVAL = 1
+};
+
+class Rival : public GameObject {
+    public:
+        Rival(string, double, double, double, double, double, int, Point2D);
+        void TakeHit(double, double, double);
+        double get_phys_dmg();
+        double get_magic_dmg();
+        double get_defense();
+        double get_health();
+        bool Update();
+        void ShowStatus();
+        bool IsAlive();
+        bool ShouldBeVisible();
+
+    protected:
+        double health;
+        double physical_damage;
+        double magical_damage;
+        double defense;
+        bool is_in_arena = true;
+        BattleArena* current_arena;
+        string name;
+        double speed;
+};
+
+#endif

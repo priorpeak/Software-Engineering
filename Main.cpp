@@ -59,7 +59,12 @@ int main() {
                 break;
             case 'x':
                 DoRunCommand(mainModel, mainView);
-                    break;
+                break;
+            case 'b':
+                cout << "Input battle parameters <Pokemon ID> <Rival ID>: ";
+                cin >> id1 >> id2;
+                DoStartBattle(mainModel, id1, id2);
+                break;
             default:
                 break;
         }

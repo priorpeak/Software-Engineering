@@ -4,13 +4,15 @@
 Model::Model() {
     time = 0;
 
-    // Initialize the 6 game objects
-    Pokemon* P1 = new Pokemon("Pikachu", 1, 'P', 2, Point2D(5, 1));
-    Pokemon* P2 = new Pokemon("Bulbasaur", 2, 'P', 1, Point2D(10, 1));
+    // Initialize the 8 game objects
+    Pokemon* P1 = new Pokemon("Pikachu", 2, 20, 5, 4, 15, 'P', 1, Point2D(5, 1));
+    Pokemon* P2 = new Pokemon("Bulbasaur", 3, 20, 5, 4, 20, 'P', 2, Point2D(10, 1));
     PokemonCenter* C1 = new PokemonCenter(1, 1, 100, Point2D(1, 20));
     PokemonCenter* C2 = new PokemonCenter(2, 2, 200, Point2D(10, 20));
     PokemonGym* G1 = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
     PokemonGym* G2 = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
+    Rival* R1 = new Rival("Jonathan", 5, 10, 3, 4, 10, 1, Point2D(10, 10));
+    Rival* R2 = new Rival("Ib", 5, 12, 4, 3, 12, 2, Point2D(15, 15));
 
     // Assign Pokemon to their array
     pokemon_ptrs[0] = P1;
@@ -24,6 +26,10 @@ Model::Model() {
     gym_ptrs[0] = G1;
     gym_ptrs[1] = G2;
 
+    // Assign Rivals to their array
+    rival_ptrs[0] = R1;
+    rival_ptrs[1] = R2;
+
     // Assign all GameObjects to their array
     object_ptrs[0] = P1;
     object_ptrs[1] = P2;
@@ -31,11 +37,14 @@ Model::Model() {
     object_ptrs[3] = C2;
     object_ptrs[4] = G1;
     object_ptrs[5] = G2;
+    object_ptrs[6] = R1;
+    object_ptrs[7] = R2;
 
-    num_objects = 6;
+    num_objects = 8;
     num_pokemon = 2;
     num_centers = 2;
     num_gyms = 2;
+    num_rivals = 2;
 
     cout << "Model default constructed." << endl;
 }
@@ -136,4 +145,13 @@ void Model::Display(View& view) {
 void Model::ShowStatus() {
     for (int i = 0; i < num_objects; i++)
         object_ptrs[i] -> ShowStatus();
+}
+
+// Lookup/Validation for Rival objects
+Rival* Model::GetRivalPtr(int id) {
+    for (int i = 0; i < num_rivals; i++) {
+        if (rival_ptrs[i] -> GetId() == id)
+            return rival_ptrs[i];
+    }
+    return 0;
 }

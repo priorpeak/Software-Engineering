@@ -12,5 +12,6 @@ void DoTrainInGymCommand(Model&, int, unsigned int);
 void DoRecoverInCenterCommand(Model&, int, unsigned int);
 void DoGoCommand(Model&, View&);
 void DoRunCommand(Model&, View&); 
+void DoStartBattle(Model&, int, int);
 
 #endif

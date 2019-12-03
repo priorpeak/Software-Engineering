@@ -3,10 +3,12 @@
 
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
+#include "Rival.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
+#include <string>
 
 enum PokemonStates {
     STOPPED = 0,
