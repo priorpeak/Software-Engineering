@@ -194,11 +194,19 @@ void Model::NewCommand(char type, int id, int x, int y) {
             case 'g':
                 for (list <PokemonGym*>::iterator obj_it = gym_ptrs.begin(); obj_it != gym_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
-                        cout << "A Pokemon Gym with that ID already exists!" << endl;
+                        Invalid_Input("A Pokemon Gym with that ID already exists!");
+                        return;
+                    } else if (id > 9) {
+                        Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                         return;
                     } else {
-                        PokemonGym* id = 
+                        PokemonGym* id = new PokemonGym();
+                        gym_ptrs.push_back(id);
                     }
+                }
+            case 'c':
+                for (list <PokemonCenter*>::iterator obj_it = center_ptrs.begin(); obj_it != center_ptrs.end(); obj_it++) {
+                    if ((*obj_it) -> GetId() == id)
                 }
         }
     } else {
