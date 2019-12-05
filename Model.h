@@ -1,8 +1,13 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include <list>
+#include <iterator>
+#include <vector>
+
 #include "Pokemon.h"
 #include "View.h"
+#include "Input_Handling.h"
 
 class Model {
     public:
@@ -14,22 +19,19 @@ class Model {
         bool Update();
         void Display(View& view);
         void ShowStatus();
-        Model(const Model&);
+        // Model(const Model&);
 
         Rival* GetRivalPtr(int);
+        void NewCommand(char, int, int, int);
 
     private:
         double time;
-        GameObject* object_ptrs[10];
-        int num_objects;
-        Pokemon* pokemon_ptrs[10];
-        int num_pokemon;
-        PokemonCenter* center_ptrs[10];
-        int num_centers;
-        PokemonGym* gym_ptrs[10];
-        int num_gyms;
-        Rival* rival_ptrs[10];
-        int num_rivals;
+        list <GameObject*> object_ptrs;
+        list <GameObject*> active_ptrs;
+        list <Pokemon*> pokemon_ptrs;
+        list <PokemonCenter*> center_ptrs;
+        list <PokemonGym*> gym_ptrs;
+        list <Rival*> rival_ptrs;
 };
 
 #endif
