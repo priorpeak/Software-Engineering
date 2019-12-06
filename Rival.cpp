@@ -9,6 +9,7 @@ Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic
     magical_damage = magic_dmg;
     defense = def;
     state = ALIVE_RIVAL;
+    BattleArena();
     // BattleArena::BattleArena()
 }
 
@@ -65,10 +66,10 @@ void Rival::ShowStatus() {
     cout << "Health: " << this -> health << endl;
     switch (state) {
         case ALIVE_RIVAL:
-            cout << "Rival is still alive!" << endl;
+            cout << "Rival is still alive!" << endl << endl;
             break;
         case FAINTED_RIVAL:
-            cout << "Rival has fainted!" << endl;
+            cout << "Rival has fainted!" << endl << endl;
             break;
     }
 }

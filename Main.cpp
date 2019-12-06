@@ -18,7 +18,7 @@ int main() {
 
     cout << endl << "EC327: Introduction to Software Engineering" << endl;
     cout << "Fall 2019" << endl;
-    cout << "Programming Assignment 3" << endl << endl;
+    cout << "Programming Assignment 4" << endl << endl;
 
     mainModel.ShowStatus(); // Print the status of all GameObjects created in the Model
 
@@ -31,55 +31,55 @@ int main() {
                 case 'm':
                     cout << "Input move paramters <Pokemon ID> <X Coordinate> <Y Coordinate>: ";
                     cin >> id >> x >> y;
-                    if (!(cin >> id >> x >> y)) {
-                        throw Invalid_Input("Was expecting three integers.");
-                        break;
-                    }
+                    // if (!(cin >> id >> x >> y)) {
+                    //     throw Invalid_Input("Was expecting three integers.");
+                    //     break;
+                    // }
                     DoMoveCommand(mainModel, id, Point2D(x, y));                
                     break;
                 case 'g':
                     cout << "Input move to Pokemon Gym parameters <Pokemon ID> <Gym ID>: ";
                     cin >> id1 >> id2;
-                    if (!(cin >> id1 >> id2)) {
-                        throw Invalid_Input("Was expecting two integers.");
-                        break;
-                    }
+                    // if (!(cin >> id1 >> id2)) {
+                    //     throw Invalid_Input("Was expecting two integers.");
+                    //     break;
+                    // }
                     DoMoveToGymCommand(mainModel, id1, id2);
                     break;
                 case 'c':
                     cout << "Input move to Pokemon Center parameters <Pokemon ID> <Center ID>: ";
                     cin >> id1 >> id2;
-                    if (!(cin >> id1 >> id2)) {
-                        throw Invalid_Input("Was expecting two integers.");
-                        break;
-                    }
+                    // if (!(cin >> id1 >> id2)) {
+                    //     throw Invalid_Input("Was expecting two integers.");
+                    //     break;
+                    // }
                     DoMoveToCenterCommand(mainModel, id1, id2);
                     break;
                 case 's':
                     cout << "Input a Pokemon's ID to stop it: ";
                     cin >> id;
-                    if (!(cin >> id)) {
-                        throw Invalid_Input("Was expecting an integer.");
-                        break;
-                    }
+                    // if (!(cin >> id)) {
+                    //     throw Invalid_Input("Was expecting an integer.");
+                    //     break;
+                    // }
                     DoStopCommand(mainModel, id);
                     break;
                 case 'r':
                     cout << "Input recover at Pokemon Center parameters <Pokemon ID> <stamina_amount>: ";
                     cin >> id1 >> stamina_amount;
-                    if (!(cin >> id1 >> stamina_amount)) {
-                        throw Invalid_Input("Was expecting two integers.");
-                        break;
-                    }
+                    // if (!(cin >> id1 >> stamina_amount)) {
+                    //     throw Invalid_Input("Was expecting two integers.");
+                    //     break;
+                    // }
                     DoRecoverInCenterCommand(mainModel, id1, stamina_amount);
                     break;
                 case 't':
                     cout << "Input training at Pokemon Gym parameters <Pokemon ID> <unit_amount>: ";
                     cin >> id >> unit_amount;
-                    if (!(cin >> id >> unit_amount)) {
-                        throw Invalid_Input("Was expecting two integers.");
-                        break;
-                    }
+                    // if (!(cin >> id >> unit_amount)) {
+                    //     throw Invalid_Input("Was expecting two integers.");
+                    //     break;
+                    // }
                     DoTrainInGymCommand(mainModel, id, unit_amount);
                     break;
                 case 'v':
@@ -92,10 +92,10 @@ int main() {
                 case 'b':
                     cout << "Input battle parameters <Pokemon ID> <Rival ID>: ";
                     cin >> id1 >> id2;
-                    if (!(cin >> id1 >> id2)) {
-                        throw Invalid_Input("Was expecting two integers");
-                        break;
-                    }
+                    // if (!(cin >> id1 >> id2)) {
+                    //     throw Invalid_Input("Was expecting two integers");
+                    //     break;
+                    // }
                     DoStartBattle(mainModel, id1, id2);
                     break;
                 case 'n':
@@ -103,10 +103,10 @@ int main() {
                     cin >> type >> id >> x >> y;
                     tolower(type);
 
-                    if (!(cin >> type >> id >> x >> y)) {
-                        throw Invalid_Input("Was expecting a character followed by three integers");
-                        break;
-                    }
+                    // if (!(cin >> type >> id >> x >> y)) {
+                    //     throw Invalid_Input("Was expecting a character followed by three integers");
+                    //     break;
+                    // }
 
                     mainModel.NewCommand(type, id, x, y);
                     break;

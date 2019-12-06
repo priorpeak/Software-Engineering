@@ -3,8 +3,8 @@
 GCC = g++ -std=c++0x
 # a target to compile the Checkpoint which depends on all object-files
 # and which links all object-files into an executable
-Game: Main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o
-	$(GCC) Main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o -o Game
+Game: Main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o Rival.o BattleArena.o
+	$(GCC) Main.o Building.o PokemonCenter.o PokemonGym.o GameObject.o Point2D.o Vector2D.o Pokemon.o Model.o GameCommand.o View.o Rival.o BattleArena.o -o Game
 # a target to compile the TestCheckpoint3.cpp into an object-file
 Main.o: Main.cpp
 	$(GCC) -c Main.cpp
@@ -26,9 +26,6 @@ PokemonCenter.o: PokemonCenter.cpp
 # a target to compile the PokemonGym.cpp into an object-file
 PokemonGym.o: PokemonGym.cpp
 	$(GCC) -c PokemonGym.cpp
-# a target to compile the Pokemon.cpp into an object-file
-Pokemon.o: Pokemon.cpp
-	$(GCC) -c Pokemon.cpp
 # a target to compile the Model.cpp into an object-file
 Model.o: Model.cpp
 	$(GCC) -c Model.cpp
@@ -38,6 +35,15 @@ GameCommand.o: GameCommand.cpp
 # a target to compile the View.cpp into an object-file
 View.o: View.cpp
 	$(GCC) -c View.cpp
+# a target to compile the Rival.cpp into an object-file
+Rival.o: Rival.cpp
+	$(GCC) -c Rival.cpp
+# a target to compile the BattleArena.cpp into an object-file
+BattleArena.o: BattleArena.cpp
+	$(GCC) -c BattleArena.cpp
+# a target to compile the Pokemon.cpp into an object-file
+Pokemon.o: Pokemon.cpp
+	$(GCC) -c Pokemon.cpp
 # clean target
 clean:
 	rm -f *.o

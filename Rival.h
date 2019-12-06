@@ -1,7 +1,6 @@
 #ifndef RIVAL_H
 #define RIVAL_H
 
-#include "Pokemon.h"
 #include "BattleArena.h"
 
 enum RivalStates {

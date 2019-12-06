@@ -198,28 +198,28 @@ void Pokemon::ShowStatus() {
 
     switch (state) {
         case STOPPED:
-            cout << " stopped" << endl;
+            cout << " stopped" << endl << endl;
             break;
         case MOVING:
-            cout << " moving at a speed of " << speed << " to destination " << destination << " at each step of " << delta << endl;
+            cout << " moving at a speed of " << speed << " to destination " << destination << " at each step of " << delta << endl << endl;
             break;
         case MOVING_TO_CENTER:
-            cout << " heading to Pokemon Center " << current_center -> GetId() << " at a speed of " << speed << " at each step of " << delta << endl;
+            cout << " heading to Pokemon Center " << current_center -> GetId() << " at a speed of " << speed << " at each step of " << delta << endl << endl;
             break;
         case MOVING_TO_GYM:
-            cout << " heading to Pokemon Gym " << current_gym -> GetId() << " at a speed of " << speed << " at each step of " << delta << endl;
+            cout << " heading to Pokemon Gym " << current_gym -> GetId() << " at a speed of " << speed << " at each step of " << delta << endl << endl;
             break;
         case IN_CENTER:
-            cout << " inside Pokemon Center " << current_center -> GetId() << endl;
+            cout << " inside Pokemon Center " << current_center -> GetId() << endl << endl;
             break;
         case IN_GYM:
-            cout << " inside Pokemon Gym " << current_gym -> GetId() << endl;
+            cout << " inside Pokemon Gym " << current_gym -> GetId() << endl << endl;
             break;
         case TRAINING_IN_GYM:
-            cout << " training in Pokemon Gym " << current_gym -> GetId() << endl;
+            cout << " training in Pokemon Gym " << current_gym -> GetId() << endl << endl;
             break;
         case RECOVERING_STAMINA:
-            cout << " recovering stamina in Pokemon Center " << current_center -> GetId() << endl;
+            cout << " recovering stamina in Pokemon Center " << current_center -> GetId() << endl << endl;
             break;
         default:
             break;
@@ -412,7 +412,7 @@ static double GetRandomAmountOfPokemonDollars() {
 
 // Returns true if state is not 'FAINTED'
 bool Pokemon::IsAlive() {
-    if (state == 'FAINTED')
+    if (state == FAINTED)
         return false;
     else
         return true;
@@ -433,11 +433,11 @@ void Pokemon::TakeHit(double physical_damage, double magical_damage, double defe
 
 // if the pokemon is in an arena and the arena is not beaten, set the state to 'BATTLE'
 void Pokemon::ReadyBattle(Rival *in_target) {
-    if (state == 'IN_ARENA' && current_arena -> IsAbleToFight() && !current_arena -> IsBeaten() && in_target -> IsAlive()) {
+    if (state == IN_ARENA && current_arena -> IsAbleToFight(pokemon_dollars, stamina) && !current_arena -> IsBeaten() && in_target -> IsAlive()) {
         target = in_target;
-        state = 'BATTLE';
+        state = BATTLE;
     } else {
-        state = 'IN_ARENA';
+        state = IN_ARENA;
     }
 }
 

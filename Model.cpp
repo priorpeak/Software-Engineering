@@ -5,8 +5,8 @@ Model::Model() {
     time = 0;
 
     // Initialize the 8 game objects
-    Pokemon* P1 = new Pokemon("Pikachu", 2, 20, 5, 4, 15, 'P', 1, Point2D(5, 1));
-    Pokemon* P2 = new Pokemon("Bulbasaur", 3, 20, 5, 4, 20, 'P', 2, Point2D(10, 1));
+    Pokemon* P1 = new Pokemon("Pikachu", 2, 20, 5, 4, 15, 1, 'P', Point2D(5, 1));
+    Pokemon* P2 = new Pokemon("Bulbasaur", 3, 20, 5, 4, 20, 2, 'P', Point2D(10, 1));
     PokemonCenter* C1 = new PokemonCenter(1, 1, 100, Point2D(1, 20));
     PokemonCenter* C2 = new PokemonCenter(2, 2, 200, Point2D(10, 20));
     PokemonGym* G1 = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
@@ -161,7 +161,7 @@ bool Model::Update() {
 
 // Outputs time and generates the view display for all GameObjects
 void Model::Display(View& view) {
-    cout << "Time: " << time << endl;
+    cout << " Time: " << time << endl;
     view.Clear();
 
     for (list <GameObject*>::iterator obj_it = active_ptrs.begin(); obj_it != active_ptrs.end(); obj_it++) {
@@ -192,21 +192,79 @@ void Model::NewCommand(char type, int id, int x, int y) {
     if (type == 'g' || type == 'c' || type == 'p' || type == 'r') {
         switch (type) {
             case 'g':
+
                 for (list <PokemonGym*>::iterator obj_it = gym_ptrs.begin(); obj_it != gym_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
                         Invalid_Input("A Pokemon Gym with that ID already exists!");
                         return;
-                    } else if (id > 9) {
-                        Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
-                        return;
-                    } else {
-                        PokemonGym* id = new PokemonGym();
-                        gym_ptrs.push_back(id);
                     }
+                }
+                
+                if (id > 9) {
+                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    return;
+                } else {
+                    PokemonGym* test = new PokemonGym(10, 1, 1.0, 2, id, Point2D(x, y));
+                    gym_ptrs.push_back(test);
+                    object_ptrs.push_back(test);
+                    break;
                 }
             case 'c':
                 for (list <PokemonCenter*>::iterator obj_it = center_ptrs.begin(); obj_it != center_ptrs.end(); obj_it++) {
-                    if ((*obj_it) -> GetId() == id)
+                    if ((*obj_it) -> GetId() == id) {
+                        Invalid_Input("A Pokemon Center with that ID already exists!");
+                        return;
+                    }
+                }
+
+                if (id > 9) {
+                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    return;
+                } else {
+                    PokemonCenter* test = new PokemonCenter(id, 5, 100, Point2D(x, y));
+                    center_ptrs.push_back(test);
+                    object_ptrs.push_back(test);
+                    break;
+                }
+            case 'p':
+                for (list <Pokemon*>::iterator obj_it = pokemon_ptrs.begin(); obj_it != pokemon_ptrs.end(); obj_it++) {
+                    if ((*obj_it) -> GetId() == id) {
+                        Invalid_Input("A Pokemon with that ID already exists!");
+                        return;
+                    }
+                }
+
+                if (id > 9) {
+                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    return;
+                } else {
+                    string name;
+                    cout << "Enter a name for the Pokemon: ";
+                    cin >> name;
+                    Pokemon* test = new Pokemon(name, id, 'P', 5, Point2D(x, y));
+                    pokemon_ptrs.push_back(test);
+                    object_ptrs.push_back(test);
+                    break;
+                }
+            case 'r':
+                for (list <Rival*>::iterator obj_it = rival_ptrs.begin(); obj_it != rival_ptrs.end(); obj_it++) {
+                    if ((*obj_it) -> GetId() == id) {
+                        Invalid_Input("A Rival with that ID already exists!");
+                        return;
+                    }
+                }
+
+                if (id > 9) {
+                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    return;
+                } else {
+                    string name;
+                    cout << "Enter a name for the Rival: ";
+                    cin >> name;
+                    Rival* test = new Rival(name, 5, 10, 3, 4, 15, id, Point2D(x, y));
+                    rival_ptrs.push_back(test);
+                    object_ptrs.push_back(test);
+                    break;
                 }
         }
     } else {
