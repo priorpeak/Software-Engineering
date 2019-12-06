@@ -86,6 +86,7 @@ Pokemon::~Pokemon() {
 
 // Tells the Pokemon to start moving
 void Pokemon::StartMoving(Point2D dest) {
+    SetupDestination(dest);
     if (location == destination) {
         cout << display_code << id_num << ": I'm already there. See?" << endl;
         state = STOPPED;
@@ -94,20 +95,19 @@ void Pokemon::StartMoving(Point2D dest) {
         cout << display_code << id_num << ": I am exhausted. I may move but you cannot see me." << endl;
     else {
         cout << display_code << id_num << ": On my way." << endl;
-        SetupDestination(dest);
         state = MOVING;
     }
 }
 
 // Tells the Pokemon to start moving to a PokemonCenter
 void Pokemon::StartMovingToCenter(PokemonCenter* center) {
+    SetupDestination(center -> GetLocation());
     if (this -> IsExhausted())
         cout << display_code << id_num << ": I am exhausted so I can't move to recover stamina..." << endl;
     else if (location == destination)
         cout << display_code << id_num << ": I am already at the Pokemon Center!" << endl;
     else {
         cout << display_code << id_num << ": On my way to center " << center -> GetId() << endl;
-        SetupDestination(center -> GetLocation());
         current_center = center;
         state = MOVING_TO_CENTER;
     }
@@ -115,13 +115,13 @@ void Pokemon::StartMovingToCenter(PokemonCenter* center) {
 
 // Tells the Pokemon to start moving to a PokemonGym
 void Pokemon::StartMovingToGym(PokemonGym* gym) {
+    SetupDestination(gym -> GetLocation());
     if (this -> IsExhausted())
         cout << display_code << id_num << ": I am exhausted so I shouldn't be going ot the gym..." << endl;
     else if (location == destination)
         cout << display_code << id_num << ": I am already at the Pokemon Gym!" << endl;
     else {
         cout << display_code << id_num << ": On my way to gym " << gym -> GetId() << endl;
-        SetupDestination(gym -> GetLocation());
         current_gym = gym;
         state = MOVING_TO_GYM;
     }

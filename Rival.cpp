@@ -1,7 +1,7 @@
 #include "Rival.h"
 
 // Construct a Rival
-Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int id, Point2D in_loc) : GameObject(in_loc, id, 'R') {
+Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int id, Point2D in_loc, BattleArena* battle_arena_pointer) : GameObject(in_loc, id, 'R') {
     this -> name = name;
     this -> speed = speed;
     health = hp;
@@ -9,8 +9,7 @@ Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic
     magical_damage = magic_dmg;
     defense = def;
     state = ALIVE_RIVAL;
-    BattleArena();
-    // BattleArena::BattleArena()
+    current_arena = battle_arena_pointer;
 }
 
 // Subtracts chosen attack type's damage from the Rival's health

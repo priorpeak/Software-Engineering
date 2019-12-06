@@ -32,6 +32,8 @@ int main() {
                     cout << "Input move paramters <Pokemon ID> <X Coordinate> <Y Coordinate>: ";
                     cin >> id >> x >> y;
                     // if (!(cin >> id >> x >> y)) {
+                    //     cin.ignore();
+                    //     cin.clear();
                     //     throw Invalid_Input("Was expecting three integers.");
                     //     break;
                     // }

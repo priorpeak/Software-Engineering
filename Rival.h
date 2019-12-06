@@ -10,7 +10,7 @@ enum RivalStates {
 
 class Rival : public GameObject {
     public:
-        Rival(string, double, double, double, double, double, int, Point2D);
+        Rival(string, double, double, double, double, double, int, Point2D, BattleArena*);
         void TakeHit(double, double, double);
         double get_phys_dmg();
         double get_magic_dmg();
@@ -30,6 +30,7 @@ class Rival : public GameObject {
         BattleArena* current_arena;
         string name;
         double speed;
+        BattleArena* battle_arena_pointer;
 };
 
 #endif

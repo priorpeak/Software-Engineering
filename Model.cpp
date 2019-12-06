@@ -11,8 +11,10 @@ Model::Model() {
     PokemonCenter* C2 = new PokemonCenter(2, 2, 200, Point2D(10, 20));
     PokemonGym* G1 = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
     PokemonGym* G2 = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
-    Rival* R1 = new Rival("Jonathan", 5, 10, 3, 4, 10, 1, Point2D(10, 10));
-    Rival* R2 = new Rival("Ib", 5, 12, 4, 3, 12, 2, Point2D(15, 15));
+    BattleArena* A1 = new BattleArena();
+    BattleArena* A2 = new BattleArena();
+    Rival* R1 = new Rival("Jonathan", 5, 10, 3, 4, 10, 1, Point2D(10, 10), A1);
+    Rival* R2 = new Rival("Ib", 5, 12, 4, 3, 12, 2, Point2D(15, 15), A2);
 
     // pokemon_ptrs list
     pokemon_ptrs.push_back(P1);
@@ -261,7 +263,8 @@ void Model::NewCommand(char type, int id, int x, int y) {
                     string name;
                     cout << "Enter a name for the Rival: ";
                     cin >> name;
-                    Rival* test = new Rival(name, 5, 10, 3, 4, 15, id, Point2D(x, y));
+                    BattleArena* A3 = new BattleArena();
+                    Rival* test = new Rival(name, 5, 10, 3, 4, 15, id, Point2D(x, y), A3);
                     rival_ptrs.push_back(test);
                     object_ptrs.push_back(test);
                     break;
