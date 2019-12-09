@@ -55,10 +55,10 @@ class Pokemon : public GameObject {
         bool UpdateLocation();
         void SetupDestination(Point2D);
 
-        double health = 20;
-        double store_health = 20;
-        double physical_damage = 5;
-        double magical_damage = 4;
+        double health;
+        double store_health;
+        double physical_damage;
+        double magical_damage;
         double defense;
         Rival* target;
         bool is_in_arena = false;

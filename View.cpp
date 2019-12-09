@@ -26,10 +26,7 @@ void View::Plot(GameObject* ptr) {
     char comp2 = ' ';
     if (GetSubscripts(x, y, ptr -> GetLocation())) {
         if (grid[x][y][0] == comp1) {
-            char* draw;
-            ptr -> DrawSelf(draw);
-            grid[x][y][0] = *draw;
-            grid[x][y][1] = *(draw + 1);
+            ptr -> DrawSelf(&this -> grid[x][y][0]);
         } else {
             grid[x][y][0] = '*';
             grid[x][y][1] = ' ';

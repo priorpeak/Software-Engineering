@@ -78,14 +78,13 @@ int main() {
 
                     mainModel.NewCommand(type, id, x, y);
                     break;
-                default:
-                    cout << "Invalid command." << endl;
-                    break;
             }
         } catch (Invalid_Input& except) {
             cout << "Invalid input - " << except.msg_ptr << endl;
         }
-
+        if (mainModel.Update()) {
+            mainModel.ShowStatus();
+        }
         mainModel.Display(mainView);
 
     } while (command != 'q');

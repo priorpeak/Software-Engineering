@@ -26,7 +26,7 @@ class Rival : public GameObject {
         double physical_damage;
         double magical_damage;
         double defense;
-        bool is_in_arena = true;
+        bool is_in_arena;
         BattleArena* current_arena;
         string name;
         double speed;

@@ -1,4 +1,5 @@
 #include "Rival.h"
+#include <stdlib.h>     
 
 // Construct a Rival
 Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int id, Point2D in_loc, BattleArena* battle_arena_pointer) : GameObject(in_loc, id, 'R') {
@@ -10,6 +11,7 @@ Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic
     defense = def;
     state = ALIVE_RIVAL;
     current_arena = battle_arena_pointer;
+    is_in_arena = true;
 }
 
 // Subtracts chosen attack type's damage from the Rival's health
@@ -61,8 +63,11 @@ bool Rival::Update() {
 void Rival::ShowStatus() {
     cout << this -> name << " status: " << endl;
     GameObject::ShowStatus();
-    
     cout << "Health: " << this -> health << endl;
+    cout << "Physical Damage: " << this -> physical_damage << endl;
+    cout << "Magial Damage: " << this -> magical_damage << endl;
+    cout << "Defense: " << this -> defense << endl;
+
     switch (state) {
         case ALIVE_RIVAL:
             cout << "Rival is still alive!" << endl << endl;

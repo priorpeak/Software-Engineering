@@ -195,6 +195,10 @@ void Pokemon::ShowStatus() {
     cout << "Stamina: " << this -> stamina << endl;
     cout << "Pokemon Dollars: " << this -> pokemon_dollars << endl;
     cout << "Experience Points: " << this -> experience_points << endl;
+    cout << "Health: " << this -> health << endl;
+    cout << "Physical Damage: " << this -> physical_damage << endl;
+    cout << "Magical Damage: " << this -> magical_damage << endl;
+    cout << "Defense: " << this -> defense << endl;
 
     switch (state) {
         case STOPPED:
