@@ -65,8 +65,7 @@ void View::Draw() {
         // Next row
         cout << endl;
     }
-    // Whitespace
-    cout << " ";
+
     for (int i = -1; i < size; i++) {
         // Even numbered line so print axis value
         if (i % 2 == 0) {
@@ -82,6 +81,8 @@ void View::Draw() {
             cout << "  ";
         }
     }
+// New line for next display to console
+cout << endl;
 }
 
 // Calculates column and row subscripts of the grid array

@@ -11,8 +11,8 @@ Model::Model() {
     PokemonCenter* C2 = new PokemonCenter(2, 2, 200, Point2D(10, 20));
     PokemonGym* G1 = new PokemonGym(10, 1, 2, 3, 1, Point2D(0, 0));
     PokemonGym* G2 = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
-    BattleArena* A1 = new BattleArena();
-    BattleArena* A2 = new BattleArena();
+    BattleArena* A1 = new BattleArena(3, 3, 4, 1, Point2D(10, 5));
+    BattleArena* A2 = new BattleArena(3, 3, 4, 2, Point2D(15, 10));
     Rival* R1 = new Rival("Jonathan", 5, 10, 3, 4, 10, 1, Point2D(10, 10), A1);
     Rival* R2 = new Rival("Ib", 5, 12, 4, 3, 12, 2, Point2D(15, 15), A2);
 
@@ -74,7 +74,7 @@ Model::Model() {
 // Model destructor
 Model::~Model() {
     for (list <GameObject*>::iterator obj_it = object_ptrs.begin(); obj_it != object_ptrs.end(); obj_it++) {
-        object_ptrs.erase(obj_it);
+        delete *obj_it;
     }
 
     cout << "Model destructed." << endl;
@@ -111,18 +111,26 @@ PokemonGym* Model::GetPokemonGymPtr(int id) {
 bool Model::Update() {
     time++;
 
+    int gyms_beaten = 0;
     for (list <PokemonGym*>::iterator obj_it = gym_ptrs.begin(); obj_it != gym_ptrs.end(); obj_it++) {
         if ((*obj_it) -> IsBeaten()) {
-            cout << "GAME OVER: You win! All Pokemon Gyms beaten!" << endl;
-            exit(0);
+            gyms_beaten++;
         }
     }
+    if (gyms_beaten == gym_ptrs.size()) {
+        cout << "GAME OVER: You win! All Pokemon Gyms beaten!" << endl;
+        exit(0);
+    }
 
+    int dead_pokemon = 0;
     for (list <Pokemon*>::iterator obj_it = pokemon_ptrs.begin(); obj_it != pokemon_ptrs.end(); obj_it++) {
         if ((*obj_it) -> IsExhausted()) {
-            cout << "GAME OVER: You lose! All of your Pokemon are tired!" << endl;
-            exit(0);
+            dead_pokemon++;
         }
+    }
+    if (dead_pokemon == pokemon_ptrs.size()) {
+        cout << "GAME OVER: You lose! All of your Pokemon are tired!" << endl;
+        exit(0);
     }
 
     // Update all GameObjects
@@ -152,18 +160,11 @@ bool Model::Update() {
             return false;
         }
     }
-
-    // for (int i = 0; i < num_objects; i++) {   
-    //     if (object_ptrs[i] -> Update())
-    //         return true;
-    //     else
-    //         return false;
-    // }
 }
 
 // Outputs time and generates the view display for all GameObjects
 void Model::Display(View& view) {
-    cout << " Time: " << time << endl;
+    cout << "Time: " << time << endl;
     view.Clear();
 
     for (list <GameObject*>::iterator obj_it = active_ptrs.begin(); obj_it != active_ptrs.end(); obj_it++) {
@@ -194,7 +195,6 @@ void Model::NewCommand(char type, int id, int x, int y) {
     if (type == 'g' || type == 'c' || type == 'p' || type == 'r') {
         switch (type) {
             case 'g':
-
                 for (list <PokemonGym*>::iterator obj_it = gym_ptrs.begin(); obj_it != gym_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
                         Invalid_Input("A Pokemon Gym with that ID already exists!");
@@ -206,9 +206,8 @@ void Model::NewCommand(char type, int id, int x, int y) {
                     Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                     return;
                 } else {
-                    PokemonGym* test = new PokemonGym(10, 1, 1.0, 2, id, Point2D(x, y));
-                    gym_ptrs.push_back(test);
-                    object_ptrs.push_back(test);
+                    gym_ptrs.push_back(new PokemonGym(10, 1, 1.0, 2, id, Point2D(x, y)));
+                    object_ptrs.push_back(new PokemonGym(10, 1, 1.0, 2, id, Point2D(x, y)));
                     break;
                 }
             case 'c':
@@ -223,9 +222,8 @@ void Model::NewCommand(char type, int id, int x, int y) {
                     Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                     return;
                 } else {
-                    PokemonCenter* test = new PokemonCenter(id, 5, 100, Point2D(x, y));
-                    center_ptrs.push_back(test);
-                    object_ptrs.push_back(test);
+                    center_ptrs.push_back(new PokemonCenter(id, 5, 100, Point2D(x, y)));
+                    object_ptrs.push_back(new PokemonCenter(id, 5, 100, Point2D(x, y)));
                     break;
                 }
             case 'p':
@@ -243,9 +241,8 @@ void Model::NewCommand(char type, int id, int x, int y) {
                     string name;
                     cout << "Enter a name for the Pokemon: ";
                     cin >> name;
-                    Pokemon* test = new Pokemon(name, id, 'P', 5, Point2D(x, y));
-                    pokemon_ptrs.push_back(test);
-                    object_ptrs.push_back(test);
+                    pokemon_ptrs.push_back(new Pokemon(name, id, 'P', 5, Point2D(x, y)));
+                    object_ptrs.push_back(new Pokemon(name, id, 'P', 5, Point2D(x, y)));
                     break;
                 }
             case 'r':
@@ -263,10 +260,8 @@ void Model::NewCommand(char type, int id, int x, int y) {
                     string name;
                     cout << "Enter a name for the Rival: ";
                     cin >> name;
-                    BattleArena* A3 = new BattleArena();
-                    Rival* test = new Rival(name, 5, 10, 3, 4, 15, id, Point2D(x, y), A3);
-                    rival_ptrs.push_back(test);
-                    object_ptrs.push_back(test);
+                    rival_ptrs.push_back(new Rival(name, 5, 10, 3, 4, 15, id, Point2D(x, y), new BattleArena(3, 3, 4, 1, Point2D(x, y))));
+                    object_ptrs.push_back(new Rival(name, 5, 10, 3, 4, 15, id, Point2D(x, y), new BattleArena(3, 3, 4, 1, Point2D(x, y))));
                     break;
                 }
         }
