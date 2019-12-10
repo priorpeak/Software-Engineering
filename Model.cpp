@@ -13,8 +13,8 @@ Model::Model() {
     PokemonGym* G2 = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
     BattleArena* A1 = new BattleArena(3, 3, 4, 1, Point2D(10, 5));
     BattleArena* A2 = new BattleArena(3, 3, 4, 2, Point2D(15, 10));
-    Rival* R1 = new Rival("Jonathan", 5, 10, 3, 4, 10, 1, Point2D(10, 10), A1);
-    Rival* R2 = new Rival("Ib", 5, 12, 4, 3, 12, 2, Point2D(15, 15), A2);
+    Rival* R1 = new Rival("Jonathan", 5, 10, 3, 4, 10, 1, Point2D(10, 5), A1);
+    Rival* R2 = new Rival("Ib", 5, 12, 4, 3, 12, 2, Point2D(15, 10), A2);
 
     // pokemon_ptrs list
     pokemon_ptrs.push_back(P1);
@@ -31,6 +31,10 @@ Model::Model() {
     // rival_ptrs list
     rival_ptrs.push_back(R1);
     rival_ptrs.push_back(R2);
+
+    // arena_ptrs list
+    arena_ptrs.push_back(A1);
+    arena_ptrs.push_back(A2);
 
     // object_ptrs list
     object_ptrs.push_back(P1);
@@ -51,6 +55,8 @@ Model::Model() {
     active_ptrs.push_back(G2);
     active_ptrs.push_back(R1);
     active_ptrs.push_back(R2);
+    active_ptrs.push_back(A1);
+    active_ptrs.push_back(A2);
 
     cout << "Model default constructed." << endl;
 }
@@ -92,6 +98,15 @@ Pokemon* Model::GetPokemonPtr(int id) {
 // Lookup/Validation for PokemonCenter objects
 PokemonCenter* Model::GetPokemonCenterPtr(int id) {
     for (list <PokemonCenter*>::iterator obj_it = center_ptrs.begin(); obj_it != center_ptrs.end(); obj_it++) {
+        if ((*obj_it) -> GetId() == id)
+            return (*obj_it);
+    }
+    return 0;
+}
+
+// Lookup/Validation for PokemonCenter objects
+BattleArena* Model::GetBattleArenaPtr(int id) {
+    for (list <BattleArena*>::iterator obj_it = arena_ptrs.begin(); obj_it != arena_ptrs.end(); obj_it++) {
         if ((*obj_it) -> GetId() == id)
             return (*obj_it);
     }

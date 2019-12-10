@@ -15,6 +15,7 @@ class Model {
         ~Model();
         Pokemon* GetPokemonPtr(int);
         PokemonCenter* GetPokemonCenterPtr(int);
+        BattleArena* GetBattleArenaPtr(int);
         PokemonGym* GetPokemonGymPtr(int);
         bool Update();
         void Display(View& view);
@@ -32,6 +33,7 @@ class Model {
         list <PokemonCenter*> center_ptrs;
         list <PokemonGym*> gym_ptrs;
         list <Rival*> rival_ptrs;
+        list <BattleArena*> arena_ptrs;
 };
 
 #endif

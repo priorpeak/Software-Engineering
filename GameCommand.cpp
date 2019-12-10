@@ -11,7 +11,7 @@ void DoMoveCommand(Model& model, int pokemon_id, Point2D p1) {
     }
 }
 
-// Starts moving a pokemon to the nearest Pokemon Center
+// Starts moving a pokemon to a Pokemon Center
 void DoMoveToCenterCommand(Model& model, int pokemon_id, int center_id) {
     if (model.GetPokemonPtr(pokemon_id) != 0) {
         Pokemon* poke1 = model.GetPokemonPtr(pokemon_id);
@@ -22,7 +22,18 @@ void DoMoveToCenterCommand(Model& model, int pokemon_id, int center_id) {
     }
 }
 
-// Starts moving a pokemon to the nearest Pokemon Gym
+// Starts moving a pokemon to a Arena
+void DoMoveToArenaCommand(Model& model, int pokemon_id, int arena_id) {
+    if (model.GetPokemonPtr(pokemon_id) != 0) {
+        Pokemon* poke1 = model.GetPokemonPtr(pokemon_id);
+        cout << "Moving " << poke1 -> GetName() << " to arena " << arena_id << endl;
+        poke1 -> StartMovingToArena(model.GetBattleArenaPtr(arena_id));
+    } else {
+        cout << "Error: Please enter a valid command!" << endl;
+    }
+}
+
+// Starts moving a pokemon to a Pokemon Gym
 void DoMoveToGymCommand(Model& model, int pokemon_id, int gym_id) {
     if (model.GetPokemonPtr(pokemon_id) != 0) {
         Pokemon* poke1 = model.GetPokemonPtr(pokemon_id);

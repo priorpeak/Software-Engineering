@@ -113,6 +113,20 @@ void Pokemon::StartMovingToCenter(PokemonCenter* center) {
     }
 }
 
+// Tells the Pokemon to start moving to a PokemonArena
+void Pokemon::StartMovingToArena(BattleArena* arena) {
+    SetupDestination(arena -> GetLocation());
+    if (this -> IsExhausted())
+        cout << display_code << id_num << ": I am exhausted so I can't move to recover stamina..." << endl;
+    else if (location == destination)
+        cout << display_code << id_num << ": I am already at the Battle Arena!" << endl;
+    else {
+        cout << display_code << id_num << ": On my way to arena " << arena -> GetId() << endl;
+        current_arena = arena;
+        state = MOVING_TO_ARENA;
+    }
+}
+
 // Tells the Pokemon to start moving to a PokemonGym
 void Pokemon::StartMovingToGym(PokemonGym* gym) {
     SetupDestination(gym -> GetLocation());
@@ -199,6 +213,7 @@ void Pokemon::ShowStatus() {
     cout << "Physical Damage: " << this -> physical_damage << endl;
     cout << "Magical Damage: " << this -> magical_damage << endl;
     cout << "Defense: " << this -> defense << endl;
+    cout << "Speed: " << this -> speed << endl;
 
     switch (state) {
         case STOPPED:
@@ -310,6 +325,10 @@ bool Pokemon::Update() {
             return false;
             break;
         case IN_GYM:
+            ShowStatus();
+            return false;
+            break;
+        case IN_ARENA:
             ShowStatus();
             return false;
             break;

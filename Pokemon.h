@@ -35,6 +35,7 @@ class Pokemon : public GameObject {
         ~Pokemon();
         void StartMoving(Point2D);
         void StartMovingToCenter(PokemonCenter*);
+        void StartMovingToArena(BattleArena*);
         void StartMovingToGym(PokemonGym*);
         void StartTraining(unsigned int);
         void StartRecoveringStamina(unsigned int);

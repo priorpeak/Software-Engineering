@@ -78,6 +78,11 @@ int main() {
 
                     mainModel.NewCommand(type, id, x, y);
                     break;
+                case 'a':
+                    cout << "Input move to Battle Arena parameters <Pokemon ID> <Arena ID>: ";
+                    cin >> id1 >> id2;
+                    DoMoveToArenaCommand(mainModel, id1, id2);
+                    break;
             }
         } catch (Invalid_Input& except) {
             cout << "Invalid input - " << except.msg_ptr << endl;
