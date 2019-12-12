@@ -18,7 +18,8 @@ int main() {
 
     cout << endl << "EC327: Introduction to Software Engineering" << endl;
     cout << "Fall 2019" << endl;
-    cout << "Programming Assignment 4" << endl << endl;
+    cout << "Programming Assignment 4" << endl;
+    cout << "Alex Prior" << endl << endl;
 
     mainModel.ShowStatus(); // Print the status of all GameObjects created in the Model
     mainModel.Display(mainView); // Display the plot at the beginning of the game
@@ -26,37 +27,77 @@ int main() {
     do {
         try {
         cout << endl << "Please enter a command character: ";
-        cin >> command;
+        if (!(cin >> command)) {
+            cin.ignore(100, '\n');
+            cin.clear();
+            throw Invalid_Input("Invalid command.");
+        }
 
             switch (command) {
                 case 'm':
                     cout << "Input move paramters <Pokemon ID> <X Coordinate> <Y Coordinate>: ";
-                    cin >> id >> x >> y;
+                    if (!(cin >> id >> x >> y)) {
+                        cin.ignore(100, '\n');
+                        cin.clear(); 
+                        throw Invalid_Input("Expected three integers");
+                        cout << endl;
+                        break;
+                    }
                     DoMoveCommand(mainModel, id, Point2D(x, y));                
                     break;
                 case 'g':
                     cout << "Input move to Pokemon Gym parameters <Pokemon ID> <Gym ID>: ";
-                    cin >> id1 >> id2;
+                    if (!(cin >> id1 >> id2)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected two integers");
+                        cout << endl;
+                        break;
+                    }
                     DoMoveToGymCommand(mainModel, id1, id2);
                     break;
                 case 'c':
                     cout << "Input move to Pokemon Center parameters <Pokemon ID> <Center ID>: ";
-                    cin >> id1 >> id2;
+                    if (!(cin >> id1 >> id2)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected two integers");
+                        cout << endl;
+                        break;
+                    }
                     DoMoveToCenterCommand(mainModel, id1, id2);
                     break;
                 case 's':
                     cout << "Input a Pokemon's ID to stop it: ";
-                    cin >> id;
+                    if (!(cin >> id)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected an integer");
+                        cout << endl;
+                        break;
+                    }
                     DoStopCommand(mainModel, id);
                     break;
                 case 'r':
                     cout << "Input recover at Pokemon Center parameters <Pokemon ID> <stamina_amount>: ";
-                    cin >> id1 >> stamina_amount;
+                    if (!(cin >> id1 >> stamina_amount)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected two integers");
+                        cout << endl;
+                        break;
+                    }
                     DoRecoverInCenterCommand(mainModel, id1, stamina_amount);
                     break;
                 case 't':
                     cout << "Input training at Pokemon Gym parameters <Pokemon ID> <unit_amount>: ";
-                    cin >> id >> unit_amount;
+                    if (!(cin >> id >> unit_amount)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected two integers");
+                        cout << endl;
+                        break;
+                    }
                     DoTrainInGymCommand(mainModel, id, unit_amount);
                     break;
                 case 'v':
@@ -68,20 +109,42 @@ int main() {
                     break;
                 case 'b':
                     cout << "Input battle parameters <Pokemon ID> <Rival ID>: ";
-                    cin >> id1 >> id2;
+                    if (!(cin >> id1 >> id2)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected two integers");
+                        cout << endl;
+                        break;
+                    }
                     DoStartBattle(mainModel, id1, id2);
                     break;
                 case 'n':
                     cout << "Create a new object by specifying: <TYPE> <ID> <X_COORD> <Y_COORD>: ";
-                    cin >> type >> id >> x >> y;
+                    if (!(cin >> type >> id >> x >> y)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected a char and three integers");
+                        cout << endl;
+                        break;
+                    }
                     tolower(type);
 
                     mainModel.NewCommand(type, id, x, y);
                     break;
+                // A new command character for moving to a battle arena
                 case 'a':
                     cout << "Input move to Battle Arena parameters <Pokemon ID> <Arena ID>: ";
-                    cin >> id1 >> id2;
+                    if (!(cin >> id1 >> id2)) {
+                        cin.ignore(100, '\n');
+                        cin.clear();
+                        throw Invalid_Input("Expected two integers");
+                        cout << endl;
+                        break;
+                    }
                     DoMoveToArenaCommand(mainModel, id1, id2);
+                    break;
+                default:
+                    cout << endl << "That command character does not exist, please try again." << endl << endl;
                     break;
             }
         } catch (Invalid_Input& except) {

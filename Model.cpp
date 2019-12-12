@@ -212,13 +212,13 @@ void Model::NewCommand(char type, int id, int x, int y) {
             case 'g':
                 for (list <PokemonGym*>::iterator obj_it = gym_ptrs.begin(); obj_it != gym_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
-                        Invalid_Input("A Pokemon Gym with that ID already exists!");
+                        throw Invalid_Input("A Pokemon Gym with that ID already exists!");
                         return;
                     }
                 }
                 
                 if (id > 9) {
-                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    throw Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                     return;
                 } else {
                     gym_ptrs.push_back(new PokemonGym(10, 1, 1.0, 2, id, Point2D(x, y)));
@@ -228,13 +228,13 @@ void Model::NewCommand(char type, int id, int x, int y) {
             case 'c':
                 for (list <PokemonCenter*>::iterator obj_it = center_ptrs.begin(); obj_it != center_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
-                        Invalid_Input("A Pokemon Center with that ID already exists!");
+                        throw Invalid_Input("A Pokemon Center with that ID already exists!");
                         return;
                     }
                 }
 
                 if (id > 9) {
-                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    throw Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                     return;
                 } else {
                     center_ptrs.push_back(new PokemonCenter(id, 5, 100, Point2D(x, y)));
@@ -244,13 +244,13 @@ void Model::NewCommand(char type, int id, int x, int y) {
             case 'p':
                 for (list <Pokemon*>::iterator obj_it = pokemon_ptrs.begin(); obj_it != pokemon_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
-                        Invalid_Input("A Pokemon with that ID already exists!");
+                        throw Invalid_Input("A Pokemon with that ID already exists!");
                         return;
                     }
                 }
 
                 if (id > 9) {
-                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    throw Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                     return;
                 } else {
                     string name;
@@ -263,13 +263,13 @@ void Model::NewCommand(char type, int id, int x, int y) {
             case 'r':
                 for (list <Rival*>::iterator obj_it = rival_ptrs.begin(); obj_it != rival_ptrs.end(); obj_it++) {
                     if ((*obj_it) -> GetId() == id) {
-                        Invalid_Input("A Rival with that ID already exists!");
+                        throw Invalid_Input("A Rival with that ID already exists!");
                         return;
                     }
                 }
 
                 if (id > 9) {
-                    Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
+                    throw Invalid_Input("ID values greater than 9 cannot be displayed on the grid. Please choose a single-digit ID");
                     return;
                 } else {
                     string name;

@@ -1,5 +1,5 @@
-#ifndef INPUTHANDLING_H
-#define INPUTHANDLING_H
+#ifndef INVALID_INPUT_H
+#define INVALID_INPUT_H
 
 class Invalid_Input {
     public:
